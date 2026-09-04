@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إدارة الدروس</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#1f2937;
+}
+
+/* LOGIN */
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    text-align:center;
+}
+
+.logo{
+    width:80px;
+    height:80px;
+    margin:auto;
+    border-radius:50%;
+    background:#667eea;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+.login-box h1{
+    margin-bottom:10px;
+}
+
+.login-box p{
+    color:#777;
+    margin-bottom:25px;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    margin-bottom:12px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#667eea;
+}
+
+button{
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-1px);
+}
+
+.primary{
+    background:#667eea;
+    color:white;
+}
+
+.danger{
+    background:#ef4444;
+    color:white;
+}
+
+.success{
+    background:#10b981;
+    color:white;
+}
+
+.secondary{
+    background:#e5e7eb;
+    color:#333;
+}
+
+.login-btn{
+    width:100%;
+    margin-top:8px;
+}
+
+.error{
+    color:#ef4444;
+    margin-top:12px;
+    display:none;
+}
+
+/* APP */
+#app{
+    display:none;
+    min-height:100vh;
+}
+
+header{
+    background:white;
+    padding:18px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+header h1{
+    color:#667eea;
+}
+
+.logout{
+    background:#ef4444;
+    color:white;
+}
+
+/* NAV */
+nav{
+    background:#fff;
+    padding:12px;
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    border-bottom:1px solid #eee;
+}
+
+.nav-btn{
+    background:#f1f3f8;
+    color:#444;
+}
+
+.nav-btn.active{
+    background:#667eea;
+    color:white;
+}
+
+/* CONTENT */
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:25px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
+
+.card h3{
+    color:#777;
+    margin-bottom:10px;
+}
+
+.number{
+    font-size:35px;
+    font-weight:bold;
+    color:#667eea;
+}
+
+.section{
+    background:white;
+    padding:22px;
+    border-radius:16px;
+    margin-bottom:20px;
+    box-shadow:0 3px 15px rgba(0,0,0,.05);
+}
+
+.section h2{
+    margin-bottom:18px;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.form-row button{
+    width:fit-content;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th,td{
+    padding:13px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+}
+
+th{
+    background:#f7f8fc;
+}
+
+.actions{
+    display:flex;
+    gap:6px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.empty{
+    text-align:center;
+    color:#999;
+    padding:25px;
+}
+
+.price{
+    font-weight:bold;
+    color:#10b981;
+}
+
+/* MOBILE */
+@media(max-width:650px){
+    header{
+        padding:15px;
+    }
+
+    header h1{
+        font-size:20px;
+    }
+
+    .container{
+        padding:15px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    table{
+        font-size:13px;
+    }
+
+    th,td{
+        padding:8px 4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+
+    <div class="login-box">
+
+        <div class="logo">📚</div>
+
+        <h1>إدارة الدروس</h1>
+        <p>سجلي الدخول للوصول إلى لوحة التحكم</p>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="كلمة السر"
+            onkeydown="if(event.key==='Enter') login()"
+        >
+
+        <button class="primary login-btn" onclick="login()">
+            دخول
+        </button>
+
+        <div class="error" id="loginError">
+            كلمة السر غير صحيحة
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- APP -->
+<div id="app">
+
+<header>
+
+    <h1>📚 إدارة الدروس</h1>
+
+    <button class="logout" onclick="logout()">
+        تسجيل الخروج
+    </button>
+
+</header>
+
+
+<nav>
+
+    <button class="nav-btn active" onclick="showPage('home',this)">
+        🏠 الرئيسية
+    </button>
+
+    <button class="nav-btn" onclick="showPage('students',this)">
+        👩‍🎓 التلاميذ
+    </button>
+
+    <button class="nav-btn" onclick="showPage('teachers',this)">
+        👨‍🏫 الأساتذة
+    </button>
+
+    <button class="nav-btn" onclick="showPage('subjects',this)">
+        📚 المواد
+    </button>
+
+    <button class="nav-btn" onclick="showPage('settings',this)">
+        ⚙️ الإعدادات
+    </button>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+    <h2>لوحة التحكم</h2>
+
+    <br>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>عدد التلاميذ</h3>
+            <div class="number" id="studentCount">0</div>
+        </div>
+
+        <div class="card">
+            <h3>عدد الأساتذة</h3>
+            <div class="number" id="teacherCount">0</div>
+        </div>
+
+        <div class="card">
+            <h3>عدد المواد</h3>
+            <div class="number" id="subjectCount">0</div>
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>المواد الحالية</h2>
+
+        <div id="homeSubjects"></div>
+
+    </div>
+
+</section>
+
+
+<!-- STUDENTS -->
+<section id="students" class="page">
+
+    <div class="section">
+
+        <h2>👩‍🎓 إضافة تلميذ</h2>
+
+        <div class="form-row">
+
+            <input id="studentName" placeholder="اسم التلميذ">
+
+            <input id="studentPhone" placeholder="رقم الهاتف">
+
+        </div>
+
+        <select id="studentSubject">
+            <option value="">اختاري المادة</option>
+        </select>
+
+        <button class="success" onclick="addStudent()">
+            + إضافة التلميذ
+        </button>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>قائمة التلاميذ</h2>
+
+        <div id="studentsList"></div>
+
+    </div>
+
+</section>
+
+
+<!-- TEACHERS -->
+<section id="teachers" class="page">
+
+    <div class="section">
+
+        <h2>👨‍🏫 إضافة أستاذ</h2>
+
+        <div class="form-row">
+
+            <input id="teacherName" placeholder="اسم الأستاذ">
+
+            <input id="teacherPhone" placeholder="رقم الهاتف">
+
+        </div>
+
+        <select id="teacherSubject">
+            <option value="">اختاري المادة</option>
+        </select>
+
+        <button class="success" onclick="addTeacher()">
+            + إضافة الأستاذ
+        </button>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>قائمة الأساتذة</h2>
+
+        <div id="teachersList"></div>
+
+    </div>
+
+</section>
+
+
+<!-- SUBJECTS -->
+<section id="subjects" class="page">
+
+    <div class="section">
+
+        <h2>📚 إضافة مادة</h2>
+
+        <div class="form-row">
+
+            <input id="subjectName" placeholder="اسم المادة">
+
+            <input
+                id="subjectPrice"
+                type="number"
+                placeholder="السعر الشهري"
+            >
+
+        </div>
+
+        <button class="success" onclick="addSubject()">
+            + إضافة مادة
+        </button>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>المواد والأسعار</h2>
+
+        <div id="subjectsList"></div>
+
+    </div>
+
+</section>
+
+
+<!-- SETTINGS -->
+<section id="settings" class="page">
+
+    <div class="section">
+
+        <h2>⚙️ الإعدادات</h2>
+
+        <p style="margin-bottom:15px;color:#777;">
+            من هنا تقدري تسيّري المواد والأسعار.
+        </p>
+
+        <button class="danger" onclick="clearAll()">
+            حذف جميع البيانات
+        </button>
+
+    </div>
+
+</section>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   DATA
+========================= */
+
+let subjects =
+JSON.parse(localStorage.getItem("subjects")) || [];
+
+let students =
+JSON.parse(localStorage.getItem("students")) || [];
+
+let teachers =
+JSON.parse(localStorage.getItem("teachers")) || [];
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login(){
+
+    const password =
+        document.getElementById("password").value;
+
+    if(password === "1234"){
+
+        document.getElementById("loginPage").style.display="none";
+        document.getElementById("app").style.display="block";
+
+        document.getElementById("loginError").style.display="none";
+
+        refresh();
+
+    }else{
+
+        document.getElementById("loginError").style.display="block";
+
+    }
+}
+
+
+function logout(){
+
+    document.getElementById("app").style.display="none";
+    document.getElementById("loginPage").style.display="flex";
+
+    document.getElementById("password").value="";
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(page,button){
+
+    document.querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
+
+    document.getElementById(page)
+        .classList.add("active");
+
+    document.querySelectorAll(".nav-btn")
+        .forEach(b=>b.classList.remove("active"));
+
+    button.classList.add("active");
+
+}
+
+
+/* =========================
+   SUBJECTS
+========================= */
+
+function addSubject(){
+
+    const name =
+        document.getElementById("subjectName").value.trim();
+
+    const price =
+        document.getElementById("subjectPrice").value;
+
+    if(!name || !price){
+
+        alert("دخلي اسم المادة والسعر");
+
+        return;
+    }
+
+    subjects.push({
+        id:Date.now(),
+        name:name,
+        price:price
+    });
+
+    save();
+
+    document.getElementById("subjectName").value="";
+    document.getElementById("subjectPrice").value="";
+
+    refresh();
+
+}
+
+
+function editSubject(id){
+
+    const subject =
+        subjects.find(s=>s.id===id);
+
+    const name =
+        prompt("اسم المادة:",subject.name);
+
+    if(name===null) return;
+
+    const price =
+        prompt("السعر الشهري:",subject.price);
+
+    if(price===null) return;
+
+    subject.name=name;
+    subject.price=price;
+
+    save();
+    refresh();
+
+}
+
+
+function deleteSubject(id){
+
+    if(!confirm("هل تريدين حذف هذه المادة؟")) return;
+
+    subjects =
+        subjects.filter(s=>s.id!==id);
+
+    save();
+    refresh();
+
+}
+
+
+/* =========================
+   STUDENTS
+========================= */
+
+function addStudent(){
+
+    const name =
+        document.getElementById("studentName").value.trim();
+
+    const phone =
+        document.getElementById("studentPhone").value.trim();
+
+    const subject =
+        document.getElementById("studentSubject").value;
+
+    if(!name || !subject){
+
+        alert("دخلي اسم التلميذ واختاري المادة");
+
+        return;
+    }
+
+    students.push({
+        id:Date.now(),
+        name:name,
+        phone:phone,
+        subject:subject
+    });
+
+    save();
+
+    document.getElementById("studentName").value="";
+    document.getElementById("studentPhone").value="";
+
+    refresh();
+
+}
+
+
+function deleteStudent(id){
+
+    if(!confirm("حذف هذا التلميذ؟")) return;
+
+    students =
+        students.filter(s=>s.id!==id);
+
+    save();
+    refresh();
+
+}
+
+
+/* =========================
+   TEACHERS
+========================= */
+
+function addTeacher(){
+
+    const name =
+        document.getElementById("teacherName").value.trim();
+
+    const phone =
+        document.getElementById("teacherPhone").value.trim();
+
+    const subject =
+        document.getElementById("teacherSubject").value;
+
+    if(!name || !subject){
+
+        alert("دخلي اسم الأستاذ واختاري المادة");
+
+        return;
+    }
+
+    teachers.push({
+        id:Date.now(),
+        name:name,
+        phone:phone,
+        subject:subject
+    });
+
+    save();
+
+    document.getElementById("teacherName").value="";
+    document.getElementById("teacherPhone").value="";
+
+    refresh();
+
+}
+
+
+function deleteTeacher(id){
+
+    if(!confirm("حذف هذا الأستاذ؟")) return;
+
+    teachers =
+        teachers.filter(t=>t.id!==id);
+
+    save();
+    refresh();
+
+}
+
+
+/* =========================
+   DISPLAY SUBJECTS
+========================= */
+
+function renderSubjects(){
+
+    const box =
+        document.getElementById("subjectsList");
+
+    if(subjects.length===0){
+
+        box.innerHTML =
+            '<div class="empty">مازال ما ضفتي حتى مادة</div>';
+
+        return;
+    }
+
+    let html=`
+    <table>
+    <tr>
+        <th>المادة</th>
+        <th>السعر الشهري</th>
+        <th>الإجراءات</th>
+    </tr>
+    `;
+
+    subjects.forEach(s=>{
+
+        html+=`
+        <tr>
+            <td>${escapeHTML(s.name)}</td>
+
+            <td class="price">
+                ${escapeHTML(String(s.price))} دج
+            </td>
+
+            <td>
+                <div class="actions">
+
+                    <button
+                        class="secondary"
+                        onclick="editSubject(${s.id})">
+                        تعديل
+                    </button>
+
+                    <button
+                        class="danger"
+                        onclick="deleteSubject(${s.id})">
+                        حذف
+                    </button>
+
+                </div>
+            </td>
+        </tr>
+        `;
+
+    });
+
+    html+="</table>";
+
+    box.innerHTML=html;
+
+}
+
+
+/* =========================
+   DISPLAY STUDENTS
+========================= */
+
+function renderStudents(){
+
+    const box =
+        document.getElementById("studentsList");
+
+    if(students.length===0){
+
+        box.innerHTML =
+            '<div class="empty">مازال ما ضفتي حتى تلميذ</div>';
+
+        return;
+    }
+
+    let html=`
+    <table>
+    <tr>
+        <th>الاسم</th>
+        <th>الهاتف</th>
+        <th>المادة</th>
+        <th>حذف</th>
+    </tr>
+    `;
+
+    students.forEach(s=>{
+
+        html+=`
+        <tr>
+
+            <td>${escapeHTML(s.name)}</td>
+
+            <td>${escapeHTML(s.phone || "-")}</td>
+
+            <td>${escapeHTML(s.subject)}</td>
+
+            <td>
+                <button
+                    class="danger"
+                    onclick="deleteStudent(${s.id})">
+                    حذف
+                </button>
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+    html+="</table>";
+
+    box.innerHTML=html;
+
+}
+
+
+/* =========================
+   DISPLAY TEACHERS
+========================= */
+
+function renderTeachers(){
+
+    const box =
+        document.getElementById("teachersList");
+
+    if(teachers.length===0){
+
+        box.innerHTML =
+            '<div class="empty">مازال ما ضفتي حتى أستاذ</div>';
+
+        return;
+    }
+
+    let html=`
+    <table>
+    <tr>
+        <th>الاسم</th>
+        <th>الهاتف</th>
+        <th>المادة</th>
+        <th>حذف</th>
+    </tr>
+    `;
+
+    teachers.forEach(t=>{
+
+        html+=`
+        <tr>
+
+            <td>${escapeHTML(t.name)}</td>
+
+            <td>${escapeHTML(t.phone || "-")}</td>
+
+            <td>${escapeHTML(t.subject)}</td>
+
+            <td>
+                <button
+                    class="danger"
+                    onclick="deleteTeacher(${t.id})">
+                    حذف
+                </button>
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+    html+="</table>";
+
+    box.innerHTML=html;
+
+}
+
+
+/* =========================
+   SELECTS
+========================= */
+
+function updateSelects(){
+
+    const studentSelect =
+        document.getElementById("studentSubject");
+
+    const teacherSelect =
+        document.getElementById("teacherSubject");
+
+    let options =
+        '<option value="">اختاري المادة</option>';
+
+    subjects.forEach(s=>{
+
+        options+=`
+            <option value="${escapeHTML(s.name)}">
+                ${escapeHTML(s.name)}
+            </option>
+        `;
+
+    });
+
+    studentSelect.innerHTML=options;
+    teacherSelect.innerHTML=options;
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function renderHome(){
+
+    document.getElementById("studentCount")
+        .textContent=students.length;
+
+    document.getElementById("teacherCount")
+        .textContent=teachers.length;
+
+    document.getElementById("subjectCount")
+        .textContent=subjects.length;
+
+
+    const box =
+        document.getElementById("homeSubjects");
+
+    if(subjects.length===0){
+
+        box.innerHTML=
+            '<div class="empty">أضيفي المواد من قسم المواد</div>';
+
+        return;
+    }
+
+    let html="";
+
+    subjects.forEach(s=>{
+
+        html+=`
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:14px;
+            border-bottom:1px solid #eee;
+        ">
+
+            <strong>${escapeHTML(s.name)}</strong>
+
+            <span class="price">
+                ${escapeHTML(String(s.price))} دج / شهر
+            </span>
+
+        </div>
+        `;
+
+    });
+
+    box.innerHTML=html;
+
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function save(){
+
+    localStorage.setItem(
+        "subjects",
+        JSON.stringify(subjects)
+    );
+
+    localStorage.setItem(
+        "students",
+        JSON.stringify(students)
+    );
+
+    localStorage.setItem(
+        "teachers",
+        JSON.stringify(teachers)
+    );
+
+}
+
+
+/* =========================
+   REFRESH
+========================= */
+
+function refresh(){
+
+    renderSubjects();
+    renderStudents();
+    renderTeachers();
+    renderHome();
+    updateSelects();
+
+}
+
+
+/* =========================
+   DELETE ALL
+========================= */
+
+function clearAll(){
+
+    if(!confirm(
+        "⚠️ راح يتحذفو جميع المواد والتلاميذ والأساتذة. متأكدة؟"
+    )) return;
+
+    subjects=[];
+    students=[];
+    teachers=[];
+
+    save();
+    refresh();
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(text){
+
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
