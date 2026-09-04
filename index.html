@@ -3,19 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>إدارة الدروس</title>
+<title>تسيير الجمعية</title>
 
 <style>
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
     font-family:Arial,Tahoma,sans-serif;
 }
 
 body{
+    margin:0;
     background:#f4f7fb;
-    color:#1f2937;
+    color:#222;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+}
+
+.hidden{
+    display:none!important;
 }
 
 /* LOGIN */
@@ -24,269 +32,266 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:20px;
-    background:linear-gradient(135deg,#667eea,#764ba2);
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
 }
 
 .login-box{
-    width:100%;
-    max-width:420px;
     background:white;
+    width:90%;
+    max-width:400px;
     padding:35px;
     border-radius:20px;
     box-shadow:0 15px 40px rgba(0,0,0,.2);
     text-align:center;
 }
 
-.logo{
-    width:80px;
-    height:80px;
-    margin:auto;
-    border-radius:50%;
-    background:#667eea;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:35px;
-    margin-bottom:20px;
-}
-
 .login-box h1{
+    color:#2563eb;
     margin-bottom:10px;
 }
 
 .login-box p{
-    color:#777;
-    margin-bottom:25px;
+    color:#666;
 }
 
 input,select{
     width:100%;
-    padding:13px;
+    padding:12px;
     border:1px solid #ddd;
     border-radius:10px;
-    margin-bottom:12px;
+    margin:7px 0;
     font-size:15px;
     outline:none;
 }
 
 input:focus,select:focus{
-    border-color:#667eea;
-}
-
-button{
-    border:none;
-    padding:12px 18px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:15px;
-    transition:.2s;
-}
-
-button:hover{
-    transform:translateY(-1px);
+    border-color:#2563eb;
 }
 
 .primary{
-    background:#667eea;
+    background:#2563eb;
     color:white;
+    padding:12px 20px;
+    border-radius:10px;
+}
+
+.primary:hover{
+    background:#1d4ed8;
 }
 
 .danger{
-    background:#ef4444;
+    background:#dc2626;
     color:white;
+    padding:8px 12px;
+    border-radius:8px;
+}
+
+.warning{
+    background:#f59e0b;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
 }
 
 .success{
-    background:#10b981;
+    background:#16a34a;
     color:white;
+    padding:8px 12px;
+    border-radius:8px;
 }
 
 .secondary{
-    background:#e5e7eb;
-    color:#333;
-}
-
-.login-btn{
-    width:100%;
-    margin-top:8px;
-}
-
-.error{
-    color:#ef4444;
-    margin-top:12px;
-    display:none;
+    background:#64748b;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
 }
 
 /* APP */
 #app{
-    display:none;
     min-height:100vh;
 }
 
 header{
-    background:white;
-    padding:18px 25px;
+    background:#2563eb;
+    color:white;
+    padding:15px 25px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-    position:sticky;
-    top:0;
-    z-index:10;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
-header h1{
-    color:#667eea;
+header h2{
+    margin:0;
 }
 
 .logout{
-    background:#ef4444;
-    color:white;
+    background:white;
+    color:#2563eb;
+    padding:9px 15px;
+    border-radius:8px;
 }
 
-/* NAV */
-nav{
-    background:#fff;
-    padding:12px;
+.layout{
     display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-    border-bottom:1px solid #eee;
+    min-height:calc(100vh - 70px);
 }
 
-.nav-btn{
-    background:#f1f3f8;
-    color:#444;
-}
-
-.nav-btn.active{
-    background:#667eea;
+/* SIDEBAR */
+.sidebar{
+    width:230px;
+    background:#111827;
     color:white;
+    padding:15px;
+}
+
+.sidebar button{
+    width:100%;
+    text-align:right;
+    background:transparent;
+    color:white;
+    padding:14px;
+    margin:3px 0;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.sidebar button:hover,
+.sidebar button.active{
+    background:#2563eb;
 }
 
 /* CONTENT */
-.container{
-    max-width:1100px;
-    margin:auto;
+.content{
+    flex:1;
     padding:25px;
+    overflow-x:auto;
 }
 
-.page{
+.section{
     display:none;
 }
 
-.page.active{
+.section.active{
     display:block;
 }
 
+.section h2{
+    margin-top:0;
+    color:#1e3a8a;
+}
+
+/* CARDS */
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:18px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
     margin-bottom:25px;
 }
 
 .card{
     background:white;
-    padding:25px;
-    border-radius:16px;
-    box-shadow:0 3px 15px rgba(0,0,0,.06);
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
 .card h3{
-    color:#777;
-    margin-bottom:10px;
+    margin:0 0 10px;
+    color:#64748b;
 }
 
 .number{
-    font-size:35px;
+    font-size:30px;
     font-weight:bold;
-    color:#667eea;
+    color:#2563eb;
 }
 
-.section{
+/* BOX */
+.box{
     background:white;
-    padding:22px;
-    border-radius:16px;
+    padding:20px;
+    border-radius:15px;
     margin-bottom:20px;
-    box-shadow:0 3px 15px rgba(0,0,0,.05);
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
 
-.section h2{
-    margin-bottom:18px;
-}
-
-.form-row{
+.form-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:10px;
 }
 
-.form-row button{
-    width:fit-content;
+/* TABLE */
+.table-container{
+    overflow-x:auto;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    margin-top:15px;
+    background:white;
 }
 
 th,td{
-    padding:13px;
+    padding:12px;
     border-bottom:1px solid #eee;
     text-align:center;
 }
 
 th{
-    background:#f7f8fc;
+    background:#eff6ff;
+    color:#1e40af;
 }
 
-.actions{
-    display:flex;
-    gap:6px;
-    justify-content:center;
-    flex-wrap:wrap;
+.badge{
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:13px;
 }
 
-.empty{
-    text-align:center;
-    color:#999;
-    padding:25px;
+.paid{
+    background:#dcfce7;
+    color:#166534;
 }
 
-.price{
-    font-weight:bold;
-    color:#10b981;
+.unpaid{
+    background:#fee2e2;
+    color:#991b1b;
 }
 
-/* MOBILE */
-@media(max-width:650px){
-    header{
+.present{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.absent{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+    .layout{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        display:flex;
+        overflow-x:auto;
+        gap:5px;
+    }
+
+    .sidebar button{
+        min-width:120px;
+        text-align:center;
+    }
+
+    .content{
         padding:15px;
-    }
-
-    header h1{
-        font-size:20px;
-    }
-
-    .container{
-        padding:15px;
-    }
-
-    .form-row{
-        grid-template-columns:1fr;
-    }
-
-    table{
-        font-size:13px;
-    }
-
-    th,td{
-        padding:8px 4px;
     }
 }
 </style>
@@ -296,246 +301,489 @@ th{
 
 <!-- LOGIN -->
 <div id="loginPage">
-
     <div class="login-box">
+        <h1>🏫 تسيير الجمعية</h1>
+        <p>أدخلي كلمة السر للدخول</p>
 
-        <div class="logo">📚</div>
+        <input type="password" id="passwordInput" placeholder="كلمة السر">
 
-        <h1>إدارة الدروس</h1>
-        <p>سجلي الدخول للوصول إلى لوحة التحكم</p>
-
-        <input
-            type="password"
-            id="password"
-            placeholder="كلمة السر"
-            onkeydown="if(event.key==='Enter') login()"
-        >
-
-        <button class="primary login-btn" onclick="login()">
+        <button class="primary" style="width:100%;margin-top:10px"
+                onclick="login()">
             دخول
         </button>
 
-        <div class="error" id="loginError">
-            كلمة السر غير صحيحة
-        </div>
-
+        <p id="loginError" style="color:red;"></p>
     </div>
-
 </div>
 
 
 <!-- APP -->
-<div id="app">
+<div id="app" class="hidden">
 
 <header>
-
-    <h1>📚 إدارة الدروس</h1>
-
-    <button class="logout" onclick="logout()">
-        تسجيل الخروج
-    </button>
-
+    <h2>🏫 نظام تسيير الجمعية</h2>
+    <button class="logout" onclick="logout()">تسجيل الخروج</button>
 </header>
 
+<div class="layout">
 
-<nav>
+<!-- SIDEBAR -->
+<div class="sidebar">
 
-    <button class="nav-btn active" onclick="showPage('home',this)">
+    <button class="active" onclick="showSection('dashboard',this)">
         🏠 الرئيسية
     </button>
 
-    <button class="nav-btn" onclick="showPage('students',this)">
-        👩‍🎓 التلاميذ
+    <button onclick="showSection('students',this)">
+        👨‍🎓 التلاميذ
     </button>
 
-    <button class="nav-btn" onclick="showPage('teachers',this)">
+    <button onclick="showSection('teachers',this)">
         👨‍🏫 الأساتذة
     </button>
 
-    <button class="nav-btn" onclick="showPage('subjects',this)">
+    <button onclick="showSection('studentAbsences',this)">
+        ❌ غيابات التلاميذ
+    </button>
+
+    <button onclick="showSection('teacherAbsences',this)">
+        ❌ غيابات الأساتذة
+    </button>
+
+    <button onclick="showSection('payments',this)">
+        💰 الدفع
+    </button>
+
+    <button onclick="showSection('subjects',this)">
         📚 المواد
     </button>
 
-    <button class="nav-btn" onclick="showPage('settings',this)">
+    <button onclick="showSection('settings',this)">
         ⚙️ الإعدادات
     </button>
 
-</nav>
+</div>
 
 
-<div class="container">
+<div class="content">
 
+<!-- DASHBOARD -->
+<section id="dashboard" class="section active">
 
-<!-- HOME -->
-<section id="home" class="page active">
+<h2>🏠 الرئيسية</h2>
 
-    <h2>لوحة التحكم</h2>
+<div class="cards">
 
-    <br>
+<div class="card">
+<h3>عدد التلاميذ</h3>
+<div class="number" id="countStudents">0</div>
+</div>
 
-    <div class="cards">
+<div class="card">
+<h3>عدد الأساتذة</h3>
+<div class="number" id="countTeachers">0</div>
+</div>
 
-        <div class="card">
-            <h3>عدد التلاميذ</h3>
-            <div class="number" id="studentCount">0</div>
-        </div>
+<div class="card">
+<h3>المواد</h3>
+<div class="number" id="countSubjects">0</div>
+</div>
 
-        <div class="card">
-            <h3>عدد الأساتذة</h3>
-            <div class="number" id="teacherCount">0</div>
-        </div>
+<div class="card">
+<h3>سلكوا</h3>
+<div class="number" id="countPaid">0</div>
+</div>
 
-        <div class="card">
-            <h3>عدد المواد</h3>
-            <div class="number" id="subjectCount">0</div>
-        </div>
+<div class="card">
+<h3>ما سلكوش</h3>
+<div class="number" id="countUnpaid">0</div>
+</div>
 
-    </div>
+<div class="card">
+<h3>غيابات التلاميذ</h3>
+<div class="number" id="countStudentAbsences">0</div>
+</div>
 
+<div class="card">
+<h3>غيابات الأساتذة</h3>
+<div class="number" id="countTeacherAbsences">0</div>
+</div>
 
-    <div class="section">
-
-        <h2>المواد الحالية</h2>
-
-        <div id="homeSubjects"></div>
-
-    </div>
+</div>
 
 </section>
 
 
 <!-- STUDENTS -->
-<section id="students" class="page">
+<section id="students" class="section">
 
-    <div class="section">
+<h2>👨‍🎓 التلاميذ</h2>
 
-        <h2>👩‍🎓 إضافة تلميذ</h2>
+<div class="box">
 
-        <div class="form-row">
+<h3>إضافة تلميذ</h3>
 
-            <input id="studentName" placeholder="اسم التلميذ">
+<div class="form-grid">
 
-            <input id="studentPhone" placeholder="رقم الهاتف">
+<input id="studentName" placeholder="اسم ولقب التلميذ">
 
-        </div>
+<select id="studentSubject"></select>
 
-        <select id="studentSubject">
-            <option value="">اختاري المادة</option>
-        </select>
+<input id="studentPhone" placeholder="رقم الهاتف">
 
-        <button class="success" onclick="addStudent()">
-            + إضافة التلميذ
-        </button>
+</div>
 
-    </div>
+<button class="primary" onclick="addStudent()">
+➕ إضافة التلميذ
+</button>
+
+</div>
 
 
-    <div class="section">
+<div class="box">
 
-        <h2>قائمة التلاميذ</h2>
+<h3>قائمة التلاميذ</h3>
 
-        <div id="studentsList"></div>
+<div class="table-container">
 
-    </div>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>الاسم واللقب</th>
+<th>المادة</th>
+<th>الهاتف</th>
+<th>الدفع</th>
+<th>الإجراء</th>
+</tr>
+</thead>
+
+<tbody id="studentsTable"></tbody>
+
+</table>
+
+</div>
+</div>
 
 </section>
 
 
 <!-- TEACHERS -->
-<section id="teachers" class="page">
+<section id="teachers" class="section">
 
-    <div class="section">
+<h2>👨‍🏫 الأساتذة</h2>
 
-        <h2>👨‍🏫 إضافة أستاذ</h2>
+<div class="box">
 
-        <div class="form-row">
+<h3>إضافة أستاذ</h3>
 
-            <input id="teacherName" placeholder="اسم الأستاذ">
+<div class="form-grid">
 
-            <input id="teacherPhone" placeholder="رقم الهاتف">
+<input id="teacherName" placeholder="اسم ولقب الأستاذ">
 
-        </div>
+<select id="teacherSubject"></select>
 
-        <select id="teacherSubject">
-            <option value="">اختاري المادة</option>
-        </select>
+<input id="teacherPhone" placeholder="رقم الهاتف">
 
-        <button class="success" onclick="addTeacher()">
-            + إضافة الأستاذ
-        </button>
+</div>
 
-    </div>
+<button class="primary" onclick="addTeacher()">
+➕ إضافة الأستاذ
+</button>
+
+</div>
 
 
-    <div class="section">
+<div class="box">
 
-        <h2>قائمة الأساتذة</h2>
+<h3>قائمة الأساتذة</h3>
 
-        <div id="teachersList"></div>
+<div class="table-container">
 
-    </div>
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>الاسم واللقب</th>
+<th>المادة</th>
+<th>الهاتف</th>
+<th>الإجراء</th>
+</tr>
+</thead>
+
+<tbody id="teachersTable"></tbody>
+
+</table>
+
+</div>
+</div>
+
+</section>
+
+
+<!-- STUDENT ABSENCES -->
+<section id="studentAbsences" class="section">
+
+<h2>❌ غيابات التلاميذ</h2>
+
+<div class="box">
+
+<div class="form-grid">
+
+<select id="absenceStudent"></select>
+
+<input type="date" id="studentAbsenceDate">
+
+<input id="studentAbsenceReason"
+       placeholder="سبب الغياب (اختياري)">
+
+</div>
+
+<button class="danger" onclick="addStudentAbsence()">
+تسجيل الغياب
+</button>
+
+</div>
+
+
+<div class="box">
+
+<h3>سجل الغيابات</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>التلميذ</th>
+<th>التاريخ</th>
+<th>السبب</th>
+<th>حذف</th>
+</tr>
+</thead>
+
+<tbody id="studentAbsencesTable"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- TEACHER ABSENCES -->
+<section id="teacherAbsences" class="section">
+
+<h2>❌ غيابات الأساتذة</h2>
+
+<div class="box">
+
+<div class="form-grid">
+
+<select id="absenceTeacher"></select>
+
+<input type="date" id="teacherAbsenceDate">
+
+<input id="teacherAbsenceReason"
+       placeholder="سبب الغياب (اختياري)">
+
+</div>
+
+<button class="danger" onclick="addTeacherAbsence()">
+تسجيل الغياب
+</button>
+
+</div>
+
+
+<div class="box">
+
+<h3>سجل الغيابات</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>الأستاذ</th>
+<th>التاريخ</th>
+<th>السبب</th>
+<th>حذف</th>
+</tr>
+</thead>
+
+<tbody id="teacherAbsencesTable"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- PAYMENTS -->
+<section id="payments" class="section">
+
+<h2>💰 الدفع</h2>
+
+<div class="box">
+
+<h3>تسيير دفع التلاميذ</h3>
+
+<div class="form-grid">
+
+<select id="paymentStudent"></select>
+
+<select id="paymentMonth">
+<option value="جانفي">جانفي</option>
+<option value="فيفري">فيفري</option>
+<option value="مارس">مارس</option>
+<option value="أفريل">أفريل</option>
+<option value="ماي">ماي</option>
+<option value="جوان">جوان</option>
+<option value="جويلية">جويلية</option>
+<option value="أوت">أوت</option>
+<option value="سبتمبر">سبتمبر</option>
+<option value="أكتوبر">أكتوبر</option>
+<option value="نوفمبر">نوفمبر</option>
+<option value="ديسمبر">ديسمبر</option>
+</select>
+
+</div>
+
+<button class="success" onclick="markPaid()">
+✅ سلك
+</button>
+
+<button class="danger" onclick="markUnpaid()">
+❌ ما سلكش
+</button>
+
+</div>
+
+
+<div class="box">
+
+<h3>حالة الدفع</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>التلميذ</th>
+<th>المادة</th>
+<th>الشهر</th>
+<th>المبلغ</th>
+<th>الحالة</th>
+</tr>
+</thead>
+
+<tbody id="paymentsTable"></tbody>
+
+</table>
+
+</div>
 
 </section>
 
 
 <!-- SUBJECTS -->
-<section id="subjects" class="page">
+<section id="subjects" class="section">
 
-    <div class="section">
+<h2>📚 المواد</h2>
 
-        <h2>📚 إضافة مادة</h2>
+<div class="box">
 
-        <div class="form-row">
+<h3>إضافة مادة</h3>
 
-            <input id="subjectName" placeholder="اسم المادة">
+<div class="form-grid">
 
-            <input
-                id="subjectPrice"
-                type="number"
-                placeholder="السعر الشهري"
-            >
+<input id="subjectName"
+       placeholder="اسم المادة">
 
-        </div>
+<input id="subjectPrice"
+       type="number"
+       placeholder="السعر الشهري">
 
-        <button class="success" onclick="addSubject()">
-            + إضافة مادة
-        </button>
+</div>
 
-    </div>
+<button class="primary" onclick="addSubject()">
+➕ إضافة مادة
+</button>
+
+</div>
 
 
-    <div class="section">
+<div class="box">
 
-        <h2>المواد والأسعار</h2>
+<h3>قائمة المواد</h3>
 
-        <div id="subjectsList"></div>
+<table>
 
-    </div>
+<thead>
+<tr>
+<th>المادة</th>
+<th>السعر الشهري</th>
+<th>تعديل</th>
+<th>حذف</th>
+</tr>
+</thead>
+
+<tbody id="subjectsTable"></tbody>
+
+</table>
+
+</div>
 
 </section>
 
 
 <!-- SETTINGS -->
-<section id="settings" class="page">
+<section id="settings" class="section">
 
-    <div class="section">
+<h2>⚙️ الإعدادات</h2>
 
-        <h2>⚙️ الإعدادات</h2>
+<div class="box">
 
-        <p style="margin-bottom:15px;color:#777;">
-            من هنا تقدري تسيّري المواد والأسعار.
-        </p>
+<h3>🔐 تغيير كلمة السر</h3>
 
-        <button class="danger" onclick="clearAll()">
-            حذف جميع البيانات
-        </button>
+<input type="password"
+       id="oldPassword"
+       placeholder="كلمة السر الحالية">
 
-    </div>
+<input type="password"
+       id="newPassword"
+       placeholder="كلمة السر الجديدة">
+
+<input type="password"
+       id="confirmPassword"
+       placeholder="تأكيد كلمة السر الجديدة">
+
+<button class="primary" onclick="changePassword()">
+تغيير كلمة السر
+</button>
+
+<p id="passwordMessage"></p>
+
+</div>
+
+<div class="box">
+
+<h3>💾 البيانات</h3>
+
+<p>
+البيانات محفوظة في المتصفح على هذا الجهاز.
+</p>
+
+<button class="danger" onclick="clearAllData()">
+⚠️ حذف جميع البيانات
+</button>
+
+</div>
 
 </section>
 
 </div>
-
+</div>
 </div>
 
 
@@ -545,14 +793,25 @@ th{
    DATA
 ========================= */
 
-let subjects =
-JSON.parse(localStorage.getItem("subjects")) || [];
+let password = localStorage.getItem("password") || "1234";
 
 let students =
-JSON.parse(localStorage.getItem("students")) || [];
+JSON.parse(localStorage.getItem("students") || "[]");
 
 let teachers =
-JSON.parse(localStorage.getItem("teachers")) || [];
+JSON.parse(localStorage.getItem("teachers") || "[]");
+
+let subjects =
+JSON.parse(localStorage.getItem("subjects") || "[]");
+
+let payments =
+JSON.parse(localStorage.getItem("payments") || "[]");
+
+let studentAbsences =
+JSON.parse(localStorage.getItem("studentAbsences") || "[]");
+
+let teacherAbsences =
+JSON.parse(localStorage.getItem("teacherAbsences") || "[]");
 
 
 /* =========================
@@ -561,21 +820,23 @@ JSON.parse(localStorage.getItem("teachers")) || [];
 
 function login(){
 
-    const password =
-        document.getElementById("password").value;
+    const input =
+    document.getElementById("passwordInput").value;
 
-    if(password === "1234"){
+    if(input === password){
 
-        document.getElementById("loginPage").style.display="none";
-        document.getElementById("app").style.display="block";
+        document.getElementById("loginPage")
+        .classList.add("hidden");
 
-        document.getElementById("loginError").style.display="none";
+        document.getElementById("app")
+        .classList.remove("hidden");
 
-        refresh();
+        updateAll();
 
     }else{
 
-        document.getElementById("loginError").style.display="block";
+        document.getElementById("loginError")
+        .textContent="❌ كلمة السر خاطئة";
 
     }
 }
@@ -583,11 +844,13 @@ function login(){
 
 function logout(){
 
-    document.getElementById("app").style.display="none";
-    document.getElementById("loginPage").style.display="flex";
+    document.getElementById("app")
+    .classList.add("hidden");
 
-    document.getElementById("password").value="";
+    document.getElementById("loginPage")
+    .classList.remove("hidden");
 
+    document.getElementById("passwordInput").value="";
 }
 
 
@@ -595,463 +858,20 @@ function logout(){
    NAVIGATION
 ========================= */
 
-function showPage(page,button){
+function showSection(id,button){
 
-    document.querySelectorAll(".page")
-        .forEach(p=>p.classList.remove("active"));
+    document.querySelectorAll(".section")
+    .forEach(s=>s.classList.remove("active"));
 
-    document.getElementById(page)
-        .classList.add("active");
+    document.getElementById(id)
+    .classList.add("active");
 
-    document.querySelectorAll(".nav-btn")
-        .forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".sidebar button")
+    .forEach(b=>b.classList.remove("active"));
 
     button.classList.add("active");
 
-}
-
-
-/* =========================
-   SUBJECTS
-========================= */
-
-function addSubject(){
-
-    const name =
-        document.getElementById("subjectName").value.trim();
-
-    const price =
-        document.getElementById("subjectPrice").value;
-
-    if(!name || !price){
-
-        alert("دخلي اسم المادة والسعر");
-
-        return;
-    }
-
-    subjects.push({
-        id:Date.now(),
-        name:name,
-        price:price
-    });
-
-    save();
-
-    document.getElementById("subjectName").value="";
-    document.getElementById("subjectPrice").value="";
-
-    refresh();
-
-}
-
-
-function editSubject(id){
-
-    const subject =
-        subjects.find(s=>s.id===id);
-
-    const name =
-        prompt("اسم المادة:",subject.name);
-
-    if(name===null) return;
-
-    const price =
-        prompt("السعر الشهري:",subject.price);
-
-    if(price===null) return;
-
-    subject.name=name;
-    subject.price=price;
-
-    save();
-    refresh();
-
-}
-
-
-function deleteSubject(id){
-
-    if(!confirm("هل تريدين حذف هذه المادة؟")) return;
-
-    subjects =
-        subjects.filter(s=>s.id!==id);
-
-    save();
-    refresh();
-
-}
-
-
-/* =========================
-   STUDENTS
-========================= */
-
-function addStudent(){
-
-    const name =
-        document.getElementById("studentName").value.trim();
-
-    const phone =
-        document.getElementById("studentPhone").value.trim();
-
-    const subject =
-        document.getElementById("studentSubject").value;
-
-    if(!name || !subject){
-
-        alert("دخلي اسم التلميذ واختاري المادة");
-
-        return;
-    }
-
-    students.push({
-        id:Date.now(),
-        name:name,
-        phone:phone,
-        subject:subject
-    });
-
-    save();
-
-    document.getElementById("studentName").value="";
-    document.getElementById("studentPhone").value="";
-
-    refresh();
-
-}
-
-
-function deleteStudent(id){
-
-    if(!confirm("حذف هذا التلميذ؟")) return;
-
-    students =
-        students.filter(s=>s.id!==id);
-
-    save();
-    refresh();
-
-}
-
-
-/* =========================
-   TEACHERS
-========================= */
-
-function addTeacher(){
-
-    const name =
-        document.getElementById("teacherName").value.trim();
-
-    const phone =
-        document.getElementById("teacherPhone").value.trim();
-
-    const subject =
-        document.getElementById("teacherSubject").value;
-
-    if(!name || !subject){
-
-        alert("دخلي اسم الأستاذ واختاري المادة");
-
-        return;
-    }
-
-    teachers.push({
-        id:Date.now(),
-        name:name,
-        phone:phone,
-        subject:subject
-    });
-
-    save();
-
-    document.getElementById("teacherName").value="";
-    document.getElementById("teacherPhone").value="";
-
-    refresh();
-
-}
-
-
-function deleteTeacher(id){
-
-    if(!confirm("حذف هذا الأستاذ؟")) return;
-
-    teachers =
-        teachers.filter(t=>t.id!==id);
-
-    save();
-    refresh();
-
-}
-
-
-/* =========================
-   DISPLAY SUBJECTS
-========================= */
-
-function renderSubjects(){
-
-    const box =
-        document.getElementById("subjectsList");
-
-    if(subjects.length===0){
-
-        box.innerHTML =
-            '<div class="empty">مازال ما ضفتي حتى مادة</div>';
-
-        return;
-    }
-
-    let html=`
-    <table>
-    <tr>
-        <th>المادة</th>
-        <th>السعر الشهري</th>
-        <th>الإجراءات</th>
-    </tr>
-    `;
-
-    subjects.forEach(s=>{
-
-        html+=`
-        <tr>
-            <td>${escapeHTML(s.name)}</td>
-
-            <td class="price">
-                ${escapeHTML(String(s.price))} دج
-            </td>
-
-            <td>
-                <div class="actions">
-
-                    <button
-                        class="secondary"
-                        onclick="editSubject(${s.id})">
-                        تعديل
-                    </button>
-
-                    <button
-                        class="danger"
-                        onclick="deleteSubject(${s.id})">
-                        حذف
-                    </button>
-
-                </div>
-            </td>
-        </tr>
-        `;
-
-    });
-
-    html+="</table>";
-
-    box.innerHTML=html;
-
-}
-
-
-/* =========================
-   DISPLAY STUDENTS
-========================= */
-
-function renderStudents(){
-
-    const box =
-        document.getElementById("studentsList");
-
-    if(students.length===0){
-
-        box.innerHTML =
-            '<div class="empty">مازال ما ضفتي حتى تلميذ</div>';
-
-        return;
-    }
-
-    let html=`
-    <table>
-    <tr>
-        <th>الاسم</th>
-        <th>الهاتف</th>
-        <th>المادة</th>
-        <th>حذف</th>
-    </tr>
-    `;
-
-    students.forEach(s=>{
-
-        html+=`
-        <tr>
-
-            <td>${escapeHTML(s.name)}</td>
-
-            <td>${escapeHTML(s.phone || "-")}</td>
-
-            <td>${escapeHTML(s.subject)}</td>
-
-            <td>
-                <button
-                    class="danger"
-                    onclick="deleteStudent(${s.id})">
-                    حذف
-                </button>
-            </td>
-
-        </tr>
-        `;
-
-    });
-
-    html+="</table>";
-
-    box.innerHTML=html;
-
-}
-
-
-/* =========================
-   DISPLAY TEACHERS
-========================= */
-
-function renderTeachers(){
-
-    const box =
-        document.getElementById("teachersList");
-
-    if(teachers.length===0){
-
-        box.innerHTML =
-            '<div class="empty">مازال ما ضفتي حتى أستاذ</div>';
-
-        return;
-    }
-
-    let html=`
-    <table>
-    <tr>
-        <th>الاسم</th>
-        <th>الهاتف</th>
-        <th>المادة</th>
-        <th>حذف</th>
-    </tr>
-    `;
-
-    teachers.forEach(t=>{
-
-        html+=`
-        <tr>
-
-            <td>${escapeHTML(t.name)}</td>
-
-            <td>${escapeHTML(t.phone || "-")}</td>
-
-            <td>${escapeHTML(t.subject)}</td>
-
-            <td>
-                <button
-                    class="danger"
-                    onclick="deleteTeacher(${t.id})">
-                    حذف
-                </button>
-            </td>
-
-        </tr>
-        `;
-
-    });
-
-    html+="</table>";
-
-    box.innerHTML=html;
-
-}
-
-
-/* =========================
-   SELECTS
-========================= */
-
-function updateSelects(){
-
-    const studentSelect =
-        document.getElementById("studentSubject");
-
-    const teacherSelect =
-        document.getElementById("teacherSubject");
-
-    let options =
-        '<option value="">اختاري المادة</option>';
-
-    subjects.forEach(s=>{
-
-        options+=`
-            <option value="${escapeHTML(s.name)}">
-                ${escapeHTML(s.name)}
-            </option>
-        `;
-
-    });
-
-    studentSelect.innerHTML=options;
-    teacherSelect.innerHTML=options;
-
-}
-
-
-/* =========================
-   HOME
-========================= */
-
-function renderHome(){
-
-    document.getElementById("studentCount")
-        .textContent=students.length;
-
-    document.getElementById("teacherCount")
-        .textContent=teachers.length;
-
-    document.getElementById("subjectCount")
-        .textContent=subjects.length;
-
-
-    const box =
-        document.getElementById("homeSubjects");
-
-    if(subjects.length===0){
-
-        box.innerHTML=
-            '<div class="empty">أضيفي المواد من قسم المواد</div>';
-
-        return;
-    }
-
-    let html="";
-
-    subjects.forEach(s=>{
-
-        html+=`
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:14px;
-            border-bottom:1px solid #eee;
-        ">
-
-            <strong>${escapeHTML(s.name)}</strong>
-
-            <span class="price">
-                ${escapeHTML(String(s.price))} دج / شهر
-            </span>
-
-        </div>
-        `;
-
-    });
-
-    box.innerHTML=html;
-
+    updateAll();
 }
 
 
@@ -1060,11 +880,6 @@ function renderHome(){
 ========================= */
 
 function save(){
-
-    localStorage.setItem(
-        "subjects",
-        JSON.stringify(subjects)
-    );
 
     localStorage.setItem(
         "students",
@@ -1076,21 +891,790 @@ function save(){
         JSON.stringify(teachers)
     );
 
+    localStorage.setItem(
+        "subjects",
+        JSON.stringify(subjects)
+    );
+
+    localStorage.setItem(
+        "payments",
+        JSON.stringify(payments)
+    );
+
+    localStorage.setItem(
+        "studentAbsences",
+        JSON.stringify(studentAbsences)
+    );
+
+    localStorage.setItem(
+        "teacherAbsences",
+        JSON.stringify(teacherAbsences)
+    );
+
+    localStorage.setItem(
+        "password",
+        password
+    );
 }
 
 
 /* =========================
-   REFRESH
+   SUBJECTS
 ========================= */
 
-function refresh(){
+function addSubject(){
 
-    renderSubjects();
-    renderStudents();
-    renderTeachers();
-    renderHome();
-    updateSelects();
+    const name =
+    document.getElementById("subjectName").value.trim();
 
+    const price =
+    document.getElementById("subjectPrice").value;
+
+    if(!name || !price){
+
+        alert("دخلي اسم المادة والسعر");
+
+        return;
+    }
+
+    subjects.push({
+        id:Date.now(),
+        name:name,
+        price:Number(price)
+    });
+
+    save();
+
+    document.getElementById("subjectName").value="";
+    document.getElementById("subjectPrice").value="";
+
+    updateAll();
+}
+
+
+function editSubject(id){
+
+    const subject =
+    subjects.find(s=>s.id===id);
+
+    if(!subject)return;
+
+    const newName =
+    prompt("اسم المادة:",subject.name);
+
+    if(newName===null)return;
+
+    const newPrice =
+    prompt("السعر الشهري:",subject.price);
+
+    if(newPrice===null)return;
+
+    subject.name =
+    newName.trim();
+
+    subject.price =
+    Number(newPrice);
+
+    save();
+
+    updateAll();
+}
+
+
+function deleteSubject(id){
+
+    if(!confirm("هل تريدين حذف المادة؟"))return;
+
+    subjects =
+    subjects.filter(s=>s.id!==id);
+
+    save();
+
+    updateAll();
+}
+
+
+function renderSubjects(){
+
+    const table =
+    document.getElementById("subjectsTable");
+
+    table.innerHTML="";
+
+    subjects.forEach(s=>{
+
+        table.innerHTML += `
+        <tr>
+            <td>${escapeHTML(s.name)}</td>
+            <td>${s.price} دج</td>
+
+            <td>
+                <button class="warning"
+                onclick="editSubject(${s.id})">
+                ✏️ تعديل
+                </button>
+            </td>
+
+            <td>
+                <button class="danger"
+                onclick="deleteSubject(${s.id})">
+                🗑️ حذف
+                </button>
+            </td>
+        </tr>
+        `;
+    });
+}
+
+
+/* =========================
+   STUDENTS
+========================= */
+
+function addStudent(){
+
+    const name =
+    document.getElementById("studentName")
+    .value.trim();
+
+    const subject =
+    document.getElementById("studentSubject")
+    .value;
+
+    const phone =
+    document.getElementById("studentPhone")
+    .value.trim();
+
+    if(!name || !subject){
+
+        alert("دخلي اسم التلميذ والمادة");
+
+        return;
+    }
+
+    students.push({
+
+        id:Date.now(),
+
+        name:name,
+
+        subject:subject,
+
+        phone:phone
+
+    });
+
+    save();
+
+    document.getElementById("studentName").value="";
+    document.getElementById("studentPhone").value="";
+
+    updateAll();
+}
+
+
+function deleteStudent(id){
+
+    if(!confirm("حذف التلميذ؟"))return;
+
+    students =
+    students.filter(s=>s.id!==id);
+
+    save();
+
+    updateAll();
+}
+
+
+function renderStudents(){
+
+    const table =
+    document.getElementById("studentsTable");
+
+    table.innerHTML="";
+
+    students.forEach((s,index)=>{
+
+        const paidCount =
+        payments.filter(p=>
+            p.studentId===s.id &&
+            p.status==="paid"
+        ).length;
+
+        table.innerHTML += `
+        <tr>
+
+        <td>${index+1}</td>
+
+        <td>${escapeHTML(s.name)}</td>
+
+        <td>${escapeHTML(s.subject)}</td>
+
+        <td>${escapeHTML(s.phone || "-")}</td>
+
+        <td>
+            <span class="badge ${
+                paidCount>0 ? "paid":"unpaid"
+            }">
+            ${paidCount>0 ? "سلك":"ما سلكش"}
+            </span>
+        </td>
+
+        <td>
+            <button class="danger"
+            onclick="deleteStudent(${s.id})">
+            🗑️ حذف
+            </button>
+        </td>
+
+        </tr>
+        `;
+    });
+}
+
+
+/* =========================
+   TEACHERS
+========================= */
+
+function addTeacher(){
+
+    const name =
+    document.getElementById("teacherName")
+    .value.trim();
+
+    const subject =
+    document.getElementById("teacherSubject")
+    .value;
+
+    const phone =
+    document.getElementById("teacherPhone")
+    .value.trim();
+
+    if(!name || !subject){
+
+        alert("دخلي اسم الأستاذ والمادة");
+
+        return;
+    }
+
+    teachers.push({
+
+        id:Date.now(),
+
+        name:name,
+
+        subject:subject,
+
+        phone:phone
+
+    });
+
+    save();
+
+    document.getElementById("teacherName").value="";
+    document.getElementById("teacherPhone").value="";
+
+    updateAll();
+}
+
+
+function deleteTeacher(id){
+
+    if(!confirm("حذف الأستاذ؟"))return;
+
+    teachers =
+    teachers.filter(t=>t.id!==id);
+
+    save();
+
+    updateAll();
+}
+
+
+function renderTeachers(){
+
+    const table =
+    document.getElementById("teachersTable");
+
+    table.innerHTML="";
+
+    teachers.forEach((t,index)=>{
+
+        table.innerHTML += `
+        <tr>
+
+        <td>${index+1}</td>
+
+        <td>${escapeHTML(t.name)}</td>
+
+        <td>${escapeHTML(t.subject)}</td>
+
+        <td>${escapeHTML(t.phone || "-")}</td>
+
+        <td>
+            <button class="danger"
+            onclick="deleteTeacher(${t.id})">
+            🗑️ حذف
+            </button>
+        </td>
+
+        </tr>
+        `;
+    });
+}
+
+
+/* =========================
+   SELECTS
+========================= */
+
+function updateSelects(){
+
+    const options =
+    subjects.map(s=>
+        `<option value="${escapeHTML(s.name)}">
+        ${escapeHTML(s.name)}
+        </option>`
+    ).join("");
+
+    document.getElementById("studentSubject")
+    .innerHTML =
+    `<option value="">اختاري المادة</option>${options}`;
+
+    document.getElementById("teacherSubject")
+    .innerHTML =
+    `<option value="">اختاري المادة</option>${options}`;
+
+
+    document.getElementById("absenceStudent")
+    .innerHTML =
+    `<option value="">اختاري التلميذ</option>`+
+    students.map(s=>
+        `<option value="${s.id}">
+        ${escapeHTML(s.name)}
+        </option>`
+    ).join("");
+
+
+    document.getElementById("absenceTeacher")
+    .innerHTML =
+    `<option value="">اختاري الأستاذ</option>`+
+    teachers.map(t=>
+        `<option value="${t.id}">
+        ${escapeHTML(t.name)}
+        </option>`
+    ).join("");
+
+
+    document.getElementById("paymentStudent")
+    .innerHTML =
+    `<option value="">اختاري التلميذ</option>`+
+    students.map(s=>
+        `<option value="${s.id}">
+        ${escapeHTML(s.name)}
+        </option>`
+    ).join("");
+}
+
+
+/* =========================
+   STUDENT ABSENCES
+========================= */
+
+function addStudentAbsence(){
+
+    const studentId =
+    Number(document.getElementById("absenceStudent").value);
+
+    const date =
+    document.getElementById("studentAbsenceDate").value;
+
+    const reason =
+    document.getElementById("studentAbsenceReason")
+    .value.trim();
+
+    if(!studentId || !date){
+
+        alert("اختاري التلميذ والتاريخ");
+
+        return;
+    }
+
+    studentAbsences.push({
+
+        id:Date.now(),
+
+        studentId:studentId,
+
+        date:date,
+
+        reason:reason
+
+    });
+
+    save();
+
+    document.getElementById("studentAbsenceReason")
+    .value="";
+
+    updateAll();
+}
+
+
+function deleteStudentAbsence(id){
+
+    studentAbsences =
+    studentAbsences.filter(a=>a.id!==id);
+
+    save();
+
+    updateAll();
+}
+
+
+function renderStudentAbsences(){
+
+    const table =
+    document.getElementById("studentAbsencesTable");
+
+    table.innerHTML="";
+
+    studentAbsences.forEach(a=>{
+
+        const student =
+        students.find(s=>s.id===a.studentId);
+
+        table.innerHTML += `
+        <tr>
+
+        <td>${student ? escapeHTML(student.name) : "-"}</td>
+
+        <td>${a.date}</td>
+
+        <td>${escapeHTML(a.reason || "-")}</td>
+
+        <td>
+        <button class="danger"
+        onclick="deleteStudentAbsence(${a.id})">
+        🗑️ حذف
+        </button>
+        </td>
+
+        </tr>
+        `;
+    });
+}
+
+
+/* =========================
+   TEACHER ABSENCES
+========================= */
+
+function addTeacherAbsence(){
+
+    const teacherId =
+    Number(document.getElementById("absenceTeacher").value);
+
+    const date =
+    document.getElementById("teacherAbsenceDate").value;
+
+    const reason =
+    document.getElementById("teacherAbsenceReason")
+    .value.trim();
+
+    if(!teacherId || !date){
+
+        alert("اختاري الأستاذ والتاريخ");
+
+        return;
+    }
+
+    teacherAbsences.push({
+
+        id:Date.now(),
+
+        teacherId:teacherId,
+
+        date:date,
+
+        reason:reason
+
+    });
+
+    save();
+
+    document.getElementById("teacherAbsenceReason")
+    .value="";
+
+    updateAll();
+}
+
+
+function deleteTeacherAbsence(id){
+
+    teacherAbsences =
+    teacherAbsences.filter(a=>a.id!==id);
+
+    save();
+
+    updateAll();
+}
+
+
+function renderTeacherAbsences(){
+
+    const table =
+    document.getElementById("teacherAbsencesTable");
+
+    table.innerHTML="";
+
+    teacherAbsences.forEach(a=>{
+
+        const teacher =
+        teachers.find(t=>t.id===a.teacherId);
+
+        table.innerHTML += `
+        <tr>
+
+        <td>${teacher ? escapeHTML(teacher.name) : "-"}</td>
+
+        <td>${a.date}</td>
+
+        <td>${escapeHTML(a.reason || "-")}</td>
+
+        <td>
+        <button class="danger"
+        onclick="deleteTeacherAbsence(${a.id})">
+        🗑️ حذف
+        </button>
+        </td>
+
+        </tr>
+        `;
+    });
+}
+
+
+/* =========================
+   PAYMENTS
+========================= */
+
+function markPaid(){
+
+    savePayment("paid");
+}
+
+
+function markUnpaid(){
+
+    savePayment("unpaid");
+}
+
+
+function savePayment(status){
+
+    const studentId =
+    Number(document.getElementById("paymentStudent").value);
+
+    const month =
+    document.getElementById("paymentMonth").value;
+
+    if(!studentId){
+
+        alert("اختاري التلميذ");
+
+        return;
+    }
+
+    const student =
+    students.find(s=>s.id===studentId);
+
+    const subject =
+    subjects.find(s=>s.name===student.subject);
+
+    const price =
+    subject ? subject.price : 0;
+
+
+    const existing =
+    payments.find(p=>
+        p.studentId===studentId &&
+        p.month===month
+    );
+
+    if(existing){
+
+        existing.status=status;
+
+        existing.amount=price;
+
+    }else{
+
+        payments.push({
+
+            id:Date.now(),
+
+            studentId:studentId,
+
+            month:month,
+
+            status:status,
+
+            amount:price
+
+        });
+    }
+
+    save();
+
+    updateAll();
+}
+
+
+function renderPayments(){
+
+    const table =
+    document.getElementById("paymentsTable");
+
+    table.innerHTML="";
+
+    payments.forEach(p=>{
+
+        const student =
+        students.find(s=>s.id===p.studentId);
+
+        if(!student)return;
+
+        table.innerHTML += `
+        <tr>
+
+        <td>${escapeHTML(student.name)}</td>
+
+        <td>${escapeHTML(student.subject)}</td>
+
+        <td>${p.month}</td>
+
+        <td>${p.amount} دج</td>
+
+        <td>
+
+        <span class="badge ${
+            p.status==="paid"
+            ? "paid"
+            : "unpaid"
+        }">
+
+        ${
+            p.status==="paid"
+            ? "✅ سلك"
+            : "❌ ما سلكش"
+        }
+
+        </span>
+
+        </td>
+
+        </tr>
+        `;
+    });
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function updateDashboard(){
+
+    document.getElementById("countStudents")
+    .textContent=students.length;
+
+    document.getElementById("countTeachers")
+    .textContent=teachers.length;
+
+    document.getElementById("countSubjects")
+    .textContent=subjects.length;
+
+    document.getElementById("countPaid")
+    .textContent=
+    payments.filter(p=>p.status==="paid").length;
+
+    document.getElementById("countUnpaid")
+    .textContent=
+    payments.filter(p=>p.status==="unpaid").length;
+
+    document.getElementById("countStudentAbsences")
+    .textContent=
+    studentAbsences.length;
+
+    document.getElementById("countTeacherAbsences")
+    .textContent=
+    teacherAbsences.length;
+}
+
+
+/* =========================
+   CHANGE PASSWORD
+========================= */
+
+function changePassword(){
+
+    const oldPass =
+    document.getElementById("oldPassword").value;
+
+    const newPass =
+    document.getElementById("newPassword").value;
+
+    const confirmPass =
+    document.getElementById("confirmPassword").value;
+
+    const message =
+    document.getElementById("passwordMessage");
+
+
+    if(oldPass!==password){
+
+        message.style.color="red";
+
+        message.textContent=
+        "❌ كلمة السر الحالية خاطئة";
+
+        return;
+    }
+
+    if(!newPass){
+
+        message.style.color="red";
+
+        message.textContent=
+        "❌ دخلي كلمة السر الجديدة";
+
+        return;
+    }
+
+    if(newPass!==confirmPass){
+
+        message.style.color="red";
+
+        message.textContent=
+        "❌ كلمتا السر غير متطابقتين";
+
+        return;
+    }
+
+    password=newPass;
+
+    save();
+
+    message.style.color="green";
+
+    message.textContent=
+    "✅ تم تغيير كلمة السر بنجاح";
+
+    document.getElementById("oldPassword").value="";
+    document.getElementById("newPassword").value="";
+    document.getElementById("confirmPassword").value="";
 }
 
 
@@ -1098,36 +1682,76 @@ function refresh(){
    DELETE ALL
 ========================= */
 
-function clearAll(){
+function clearAllData(){
 
     if(!confirm(
-        "⚠️ راح يتحذفو جميع المواد والتلاميذ والأساتذة. متأكدة؟"
-    )) return;
+        "⚠️ راح تتحذف كامل البيانات. متأكدة؟"
+    ))return;
 
-    subjects=[];
     students=[];
     teachers=[];
+    subjects=[];
+    payments=[];
+    studentAbsences=[];
+    teacherAbsences=[];
 
     save();
-    refresh();
 
+    updateAll();
 }
 
 
 /* =========================
-   SECURITY
+   SECURITY HTML
 ========================= */
 
 function escapeHTML(text){
 
-    return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
+    return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
+
+
+/* =========================
+   UPDATE ALL
+========================= */
+
+function updateAll(){
+
+    updateSelects();
+
+    renderSubjects();
+
+    renderStudents();
+
+    renderTeachers();
+
+    renderStudentAbsences();
+
+    renderTeacherAbsences();
+
+    renderPayments();
+
+    updateDashboard();
+}
+
+
+/* ENTER LOGIN */
+document.getElementById("passwordInput")
+.addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+        login();
+    }
+
+});
+
+
+updateAll();
 
 </script>
 
