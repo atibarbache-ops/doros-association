@@ -2,334 +2,64 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>تسيير الجمعية</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    font-family:Arial,Tahoma,sans-serif;
-}
-
-body{
-    margin:0;
-    background:#f4f6fb;
-    color:#222;
-}
-
-button{
-    border:0;
-    cursor:pointer;
-}
-
-.login-page{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,#667eea,#764ba2);
-}
-
-.login-box{
-    width:90%;
-    max-width:420px;
-    background:white;
-    padding:35px;
-    border-radius:20px;
-    box-shadow:0 15px 40px #0003;
-    text-align:center;
-}
-
-.login-box h1{
-    margin-bottom:25px;
-}
-
-.login-box input{
-    width:100%;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    margin-bottom:15px;
-    font-size:16px;
-}
-
-.login-btn{
-    width:100%;
-    padding:14px;
-    background:#667eea;
-    color:white;
-    border-radius:10px;
-    font-size:17px;
-}
-
-.error{
-    color:#d00;
-    margin-top:12px;
-}
-
-.app{
-    display:none;
-}
-
-header{
-    background:linear-gradient(135deg,#667eea,#764ba2);
-    color:white;
-    padding:20px;
-    box-shadow:0 3px 10px #0002;
-}
-
-.header-content{
-    max-width:1400px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-header h1{
-    margin:0;
-}
-
-.header-buttons{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.header-buttons button{
-    padding:10px 15px;
-    border-radius:8px;
-    color:white;
-    background:#ffffff25;
-}
-
-.container{
-    max-width:1400px;
-    margin:25px auto;
-    padding:0 15px;
-}
-
-.tabs{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
-}
-
-.tab{
-    padding:12px 18px;
-    border-radius:10px;
-    background:white;
-    color:#555;
-    box-shadow:0 2px 7px #0001;
-}
-
-.tab.active{
-    background:#667eea;
-    color:white;
-}
-
-.section{
-    display:none;
-}
-
-.section.active{
-    display:block;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
-    margin-bottom:25px;
-}
-
-.card{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 3px 10px #0001;
-}
-
-.card h3{
-    margin-top:0;
-    color:#666;
-}
-
-.number{
-    font-size:30px;
-    font-weight:bold;
-    color:#667eea;
-}
-
-.form-box{
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 3px 10px #0001;
-    margin-bottom:20px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:12px;
-}
-
-input,select{
-    width:100%;
-    padding:11px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    font-size:15px;
-    background:white;
-}
-
-.primary{
-    background:#667eea;
-    color:white;
-    padding:11px 18px;
-    border-radius:8px;
-}
-
-.success{
-    background:#16a085;
-    color:white;
-    padding:8px 12px;
-    border-radius:7px;
-}
-
-.danger{
-    background:#e74c3c;
-    color:white;
-    padding:8px 12px;
-    border-radius:7px;
-}
-
-.warning{
-    background:#f39c12;
-    color:white;
-    padding:8px 12px;
-    border-radius:7px;
-}
-
-.secondary{
-    background:#777;
-    color:white;
-    padding:8px 12px;
-    border-radius:7px;
-}
-
-.table-box{
-    background:white;
-    padding:15px;
-    border-radius:15px;
-    box-shadow:0 3px 10px #0001;
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:850px;
-}
-
-th,td{
-    padding:12px 8px;
-    border-bottom:1px solid #eee;
-    text-align:center;
-}
-
-th{
-    background:#f1f3f9;
-}
-
-.badge{
-    display:inline-block;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:13px;
-}
-
-.paid{
-    background:#d5f5e3;
-    color:#117a65;
-}
-
-.unpaid{
-    background:#fadbd8;
-    color:#922b21;
-}
-
-.actions{
-    display:flex;
-    gap:5px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-.search{
-    max-width:350px;
-    margin-bottom:15px;
-}
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:#0007;
-    align-items:center;
-    justify-content:center;
-    z-index:1000;
-}
-
-.modal-box{
-    width:90%;
-    max-width:450px;
-    background:white;
-    padding:25px;
-    border-radius:15px;
-}
-
-.modal-buttons{
-    display:flex;
-    gap:10px;
-    margin-top:15px;
-}
-
-.modal-buttons button{
-    flex:1;
-}
-
-.empty{
-    padding:25px;
-    color:#777;
-}
-
-.small{
-    font-size:13px;
-    color:#777;
-}
-
+*{box-sizing:border-box;font-family:Arial,Tahoma,sans-serif}
+body{margin:0;background:#f4f6fb;color:#222}
+button{border:0;cursor:pointer}
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea,#764ba2)}
+.login-box{width:90%;max-width:420px;background:#fff;padding:35px;border-radius:20px;box-shadow:0 15px 40px #0003;text-align:center}
+.login-box h1{margin-bottom:25px}
+.login-box input{width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:15px;font-size:16px}
+.login-btn{width:100%;padding:14px;background:#667eea;color:#fff;border-radius:10px;font-size:17px}
+.error{color:#d00;margin-top:12px}
+.app{display:none}
+header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:20px;box-shadow:0 3px 10px #0002}
+.header-content{max-width:1400px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px}
+header h1{margin:0}
+.header-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.header-buttons button{padding:10px 15px;border-radius:8px;color:#fff;background:#ffffff25}
+.container{max-width:1400px;margin:25px auto;padding:0 15px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tab{padding:12px 18px;border-radius:10px;background:#fff;color:#555;box-shadow:0 2px 7px #0001}
+.tab.active{background:#667eea;color:#fff}
+.section{display:none}
+.section.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:25px}
+.card{background:#fff;border-radius:15px;padding:20px;box-shadow:0 3px 10px #0001}
+.card h3{margin-top:0;color:#666}
+.number{font-size:30px;font-weight:bold;color:#667eea}
+.form-box{background:#fff;padding:20px;border-radius:15px;box-shadow:0 3px 10px #0001;margin-bottom:20px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+input,select{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;font-size:15px;background:#fff}
+.primary{background:#667eea;color:#fff;padding:11px 18px;border-radius:8px}
+.success{background:#16a085;color:#fff;padding:8px 12px;border-radius:7px}
+.danger{background:#e74c3c;color:#fff;padding:8px 12px;border-radius:7px}
+.warning{background:#f39c12;color:#fff;padding:8px 12px;border-radius:7px}
+.secondary{background:#777;color:#fff;padding:8px 12px;border-radius:7px}
+.table-box{background:#fff;padding:15px;border-radius:15px;box-shadow:0 3px 10px #0001;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:850px}
+th,td{padding:12px 8px;border-bottom:1px solid #eee;text-align:center}
+th{background:#f1f3f9}
+.badge{display:inline-block;padding:5px 10px;border-radius:20px;font-size:13px}
+.paid{background:#d5f5e3;color:#117a65}
+.unpaid{background:#fadbd8;color:#922b21}
+.actions{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.search{max-width:350px;margin-bottom:15px}
+.empty{padding:25px;color:#777}
+.small{font-size:13px;color:#777}
+.modal{display:none;position:fixed;inset:0;background:#0007;align-items:center;justify-content:center;z-index:1000}
+.modal-box{width:90%;max-width:450px;background:#fff;padding:25px;border-radius:15px}
+.modal-buttons{display:flex;gap:10px;margin-top:15px}
+.modal-buttons button{flex:1}
+.firebase-status{font-size:13px;margin-top:8px}
 @media(max-width:600px){
-    .header-content{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    header h1{
-        text-align:center;
-    }
-
-    .header-buttons{
-        justify-content:center;
-    }
-
-    .tab{
-        flex:1;
-        min-width:120px;
-    }
+.header-content{flex-direction:column;align-items:stretch}
+header h1{text-align:center}
+.header-buttons{justify-content:center}
+.tab{flex:1;min-width:120px}
 }
 </style>
 </head>
@@ -338,1191 +68,1070 @@ th{
 
 <!-- LOGIN -->
 <div class="login-page" id="loginPage">
-    <div class="login-box">
-        <h1>🏫 تسيير الجمعية</h1>
-        <p>الدخول إلى لوحة التسيير</p>
+<div class="login-box">
+<h1>🏫 تسيير الجمعية</h1>
+<p>الدخول إلى لوحة التسيير</p>
 
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="كلمة السر"
-        >
+<input type="password" id="loginPassword" placeholder="كلمة السر">
 
-        <button class="login-btn" id="loginBtn">
-            دخول
-        </button>
+<button class="login-btn" id="loginBtn">دخول</button>
 
-        <div class="error" id="loginError"></div>
-    </div>
+<div class="error" id="loginError"></div>
+<div class="firebase-status" id="firebaseStatus">🔄 جاري الاتصال...</div>
+</div>
 </div>
 
 <!-- APP -->
 <div class="app" id="app">
 
 <header>
-    <div class="header-content">
-        <h1>🏫 تسيير الجمعية</h1>
+<div class="header-content">
 
-        <div class="header-buttons">
-            <button id="changePasswordBtn">🔐 تغيير كلمة السر</button>
-            <button id="logoutBtn">🚪 خروج</button>
-        </div>
-    </div>
+<h1>🏫 تسيير الجمعية</h1>
+
+<div class="header-buttons">
+<button id="changePasswordBtn">🔐 تغيير كلمة السر</button>
+<button id="logoutBtn">🚪 خروج</button>
+</div>
+
+</div>
 </header>
 
 <div class="container">
 
 <!-- TABS -->
 <div class="tabs">
-    <button class="tab active" data-section="dashboard">📊 الرئيسية</button>
-    <button class="tab" data-section="students">👨‍🎓 الطلاب</button>
-    <button class="tab" data-section="teachers">👨‍🏫 الأساتذة</button>
-    <button class="tab" data-section="subjects">📚 المواد</button>
-    <button class="tab" data-section="studentAbsences">❌ غياب الطلاب</button>
-    <button class="tab" data-section="teacherAbsences">❌ غياب الأساتذة</button>
-    <button class="tab" data-section="payments">💰 الدفع</button>
+
+<button class="tab active" data-section="dashboard">📊 الرئيسية</button>
+<button class="tab" data-section="students">👨‍🎓 الطلاب</button>
+<button class="tab" data-section="teachers">👨‍🏫 الأساتذة</button>
+<button class="tab" data-section="subjects">📚 المواد</button>
+<button class="tab" data-section="studentAbsences">❌ غياب الطلاب</button>
+<button class="tab" data-section="teacherAbsences">❌ غياب الأساتذة</button>
+<button class="tab" data-section="payments">💰 الدفع</button>
+
 </div>
 
 <!-- DASHBOARD -->
 <section class="section active" id="dashboard">
 
-    <div class="cards">
+<div class="cards">
 
-        <div class="card">
-            <h3>عدد الطلاب</h3>
-            <div class="number" id="dashStudents">0</div>
-        </div>
+<div class="card">
+<h3>عدد الطلاب</h3>
+<div class="number" id="dashStudents">0</div>
+</div>
 
-        <div class="card">
-            <h3>عدد الأساتذة</h3>
-            <div class="number" id="dashTeachers">0</div>
-        </div>
+<div class="card">
+<h3>عدد الأساتذة</h3>
+<div class="number" id="dashTeachers">0</div>
+</div>
 
-        <div class="card">
-            <h3>عدد المواد</h3>
-            <div class="number" id="dashSubjects">0</div>
-        </div>
+<div class="card">
+<h3>عدد المواد</h3>
+<div class="number" id="dashSubjects">0</div>
+</div>
 
-        <div class="card">
-            <h3>غياب الطلاب</h3>
-            <div class="number" id="dashStudentAbsences">0</div>
-        </div>
+<div class="card">
+<h3>غياب الطلاب</h3>
+<div class="number" id="dashStudentAbsences">0</div>
+</div>
 
-        <div class="card">
-            <h3>غياب الأساتذة</h3>
-            <div class="number" id="dashTeacherAbsences">0</div>
-        </div>
+<div class="card">
+<h3>غياب الأساتذة</h3>
+<div class="number" id="dashTeacherAbsences">0</div>
+</div>
 
-    </div>
+</div>
 
-    <div class="form-box">
-        <h2>📅 ملخص هذا الشهر</h2>
-        <p id="monthSummary"></p>
-    </div>
+<div class="form-box">
+<h2>📅 ملخص هذا الشهر</h2>
+<p id="monthSummary"></p>
+</div>
 
 </section>
 
 <!-- STUDENTS -->
 <section class="section" id="students">
 
-    <div class="form-box">
+<div class="form-box">
 
-        <h2>➕ إضافة طالب</h2>
+<h2>➕ إضافة طالب</h2>
 
-        <div class="form-grid">
+<div class="form-grid">
 
-            <input id="studentName" placeholder="اسم الطالب">
+<input id="studentName" placeholder="اسم الطالب">
 
-            <input id="studentPhone" placeholder="رقم الهاتف">
+<input id="studentPhone" placeholder="رقم الهاتف">
 
-            <select id="studentSubject">
-                <option value="">اختر المادة</option>
-            </select>
+<select id="studentSubject">
+<option value="">اختر المادة</option>
+</select>
 
-            <input
-                type="number"
-                id="studentDebt"
-                placeholder="الدين"
-                min="0"
-                step="0.01"
-            >
+<input type="number" id="studentDebt" placeholder="الدين" min="0" step="0.01">
 
-        </div>
+</div>
 
-        <br>
+<br>
 
-        <button class="primary" id="addStudentBtn">
-            إضافة الطالب
-        </button>
+<button class="primary" id="addStudentBtn">إضافة الطالب</button>
 
-    </div>
+</div>
 
-    <div class="form-box">
-        <h2>👨‍🎓 قائمة الطلاب</h2>
+<div class="form-box">
 
-        <input
-            class="search"
-            id="studentSearch"
-            placeholder="🔎 ابحث عن طالب..."
-        >
+<h2>👨‍🎓 قائمة الطلاب</h2>
 
-        <div class="table-box">
+<input class="search" id="studentSearch" placeholder="🔎 ابحث عن طالب...">
 
-            <table>
+<div class="table-box">
 
-                <thead>
-                    <tr>
-                        <th>الطالب</th>
-                        <th>الهاتف</th>
-                        <th>المادة</th>
-                        <th>السعر الشهري</th>
-                        <th>الغياب</th>
-                        <th>الدين</th>
-                        <th>دفع هذا الشهر</th>
-                        <th>الإجراءات</th>
-                    </tr>
-                </thead>
+<table>
 
-                <tbody id="studentsTable"></tbody>
+<thead>
+<tr>
+<th>الطالب</th>
+<th>الهاتف</th>
+<th>المادة</th>
+<th>السعر الشهري</th>
+<th>الغياب</th>
+<th>الدين</th>
+<th>دفع هذا الشهر</th>
+<th>الإجراءات</th>
+</tr>
+</thead>
 
-            </table>
+<tbody id="studentsTable"></tbody>
 
-        </div>
-    </div>
+</table>
+
+</div>
+</div>
 
 </section>
 
 <!-- TEACHERS -->
 <section class="section" id="teachers">
 
-    <div class="form-box">
+<div class="form-box">
 
-        <h2>➕ إضافة أستاذ</h2>
+<h2>➕ إضافة أستاذ</h2>
 
-        <div class="form-grid">
+<div class="form-grid">
 
-            <input id="teacherName" placeholder="اسم الأستاذ">
+<input id="teacherName" placeholder="اسم الأستاذ">
 
-            <input id="teacherPhone" placeholder="رقم الهاتف">
+<input id="teacherPhone" placeholder="رقم الهاتف">
 
-            <input id="teacherSpecialty" placeholder="التخصص">
+<input id="teacherSpecialty" placeholder="التخصص">
 
-        </div>
+</div>
 
-        <br>
+<br>
 
-        <button class="primary" id="addTeacherBtn">
-            إضافة الأستاذ
-        </button>
+<button class="primary" id="addTeacherBtn">إضافة الأستاذ</button>
 
-    </div>
+</div>
 
-    <div class="form-box">
+<div class="form-box">
 
-        <h2>👨‍🏫 قائمة الأساتذة</h2>
+<h2>👨‍🏫 قائمة الأساتذة</h2>
 
-        <input
-            class="search"
-            id="teacherSearch"
-            placeholder="🔎 ابحث عن أستاذ..."
-        >
+<input class="search" id="teacherSearch" placeholder="🔎 ابحث عن أستاذ...">
 
-        <div class="table-box">
+<div class="table-box">
 
-            <table>
+<table>
 
-                <thead>
-                    <tr>
-                        <th>الأستاذ</th>
-                        <th>الهاتف</th>
-                        <th>التخصص</th>
-                        <th>الإجراءات</th>
-                    </tr>
-                </thead>
+<thead>
+<tr>
+<th>الأستاذ</th>
+<th>الهاتف</th>
+<th>التخصص</th>
+<th>الإجراءات</th>
+</tr>
+</thead>
 
-                <tbody id="teachersTable"></tbody>
+<tbody id="teachersTable"></tbody>
 
-            </table>
+</table>
 
-        </div>
-
-    </div>
+</div>
+</div>
 
 </section>
 
 <!-- SUBJECTS -->
 <section class="section" id="subjects">
 
-    <div class="form-box">
+<div class="form-box">
 
-        <h2>➕ إضافة مادة</h2>
+<h2>➕ إضافة مادة</h2>
 
-        <div class="form-grid">
+<div class="form-grid">
 
-            <input id="subjectName" placeholder="اسم المادة">
+<input id="subjectName" placeholder="اسم المادة">
 
-            <input
-                type="number"
-                id="subjectPrice"
-                placeholder="السعر الشهري"
-                min="0"
-            >
+<input type="number" id="subjectPrice" placeholder="السعر الشهري" min="0">
 
-        </div>
+</div>
 
-        <br>
+<br>
 
-        <button class="primary" id="addSubjectBtn">
-            إضافة المادة
-        </button>
+<button class="primary" id="addSubjectBtn">إضافة المادة</button>
 
-    </div>
+</div>
 
-    <div class="form-box">
+<div class="form-box">
 
-        <h2>📚 المواد</h2>
+<h2>📚 قائمة المواد</h2>
 
-        <div class="table-box">
+<div class="table-box">
 
-            <table>
+<table>
 
-                <thead>
-                    <tr>
-                        <th>المادة</th>
-                        <th>السعر الشهري</th>
-                        <th>عدد الطلاب</th>
-                        <th>الإجراءات</th>
-                    </tr>
-                </thead>
+<thead>
+<tr>
+<th>المادة</th>
+<th>السعر الشهري</th>
+<th>الإجراءات</th>
+</tr>
+</thead>
 
-                <tbody id="subjectsTable"></tbody>
+<tbody id="subjectsTable"></tbody>
 
-            </table>
+</table>
 
-        </div>
-
-    </div>
+</div>
+</div>
 
 </section>
 
 <!-- STUDENT ABSENCES -->
 <section class="section" id="studentAbsences">
 
-    <div class="form-box">
+<div class="form-box">
 
-        <h2>❌ تسجيل غياب طالب</h2>
+<h2>➕ تسجيل غياب طالب</h2>
 
-        <div class="form-grid">
+<div class="form-grid">
 
-            <select id="absenceStudent">
-                <option value="">اختر الطالب</option>
-            </select>
+<select id="absenceStudent">
+<option value="">اختر الطالب</option>
+</select>
 
-            <input type="date" id="absenceDate">
+<input type="date" id="studentAbsenceDate">
 
-            <input id="absenceReason" placeholder="سبب الغياب">
+<input id="studentAbsenceReason" placeholder="سبب الغياب">
 
-        </div>
+</div>
 
-        <br>
+<br>
 
-        <button class="primary" id="addStudentAbsenceBtn">
-            تسجيل الغياب
-        </button>
+<button class="primary" id="addStudentAbsenceBtn">
+تسجيل الغياب
+</button>
 
-    </div>
+</div>
 
-    <div class="table-box">
+<div class="form-box">
 
-        <table>
+<h2>❌ غيابات الطلاب</h2>
 
-            <thead>
-                <tr>
-                    <th>الطالب</th>
-                    <th>التاريخ</th>
-                    <th>السبب</th>
-                    <th>الإجراء</th>
-                </tr>
-            </thead>
+<div class="table-box">
 
-            <tbody id="studentAbsencesTable"></tbody>
+<table>
 
-        </table>
+<thead>
+<tr>
+<th>الطالب</th>
+<th>التاريخ</th>
+<th>السبب</th>
+<th>الإجراءات</th>
+</tr>
+</thead>
 
-    </div>
+<tbody id="studentAbsencesTable"></tbody>
+
+</table>
+
+</div>
+</div>
 
 </section>
 
 <!-- TEACHER ABSENCES -->
 <section class="section" id="teacherAbsences">
 
-    <div class="form-box">
+<div class="form-box">
 
-        <h2>❌ تسجيل غياب أستاذ</h2>
+<h2>➕ تسجيل غياب أستاذ</h2>
 
-        <div class="form-grid">
+<div class="form-grid">
 
-            <select id="absenceTeacher">
-                <option value="">اختر الأستاذ</option>
-            </select>
+<select id="absenceTeacher">
+<option value="">اختر الأستاذ</option>
+</select>
 
-            <input type="date" id="teacherAbsenceDate">
+<input type="date" id="teacherAbsenceDate">
 
-            <input id="teacherAbsenceReason" placeholder="سبب الغياب">
+<input id="teacherAbsenceReason" placeholder="سبب الغياب">
 
-        </div>
+</div>
 
-        <br>
+<br>
 
-        <button class="primary" id="addTeacherAbsenceBtn">
-            تسجيل الغياب
-        </button>
+<button class="primary" id="addTeacherAbsenceBtn">
+تسجيل الغياب
+</button>
 
-    </div>
+</div>
 
-    <div class="table-box">
+<div class="form-box">
 
-        <table>
+<h2>❌ غيابات الأساتذة</h2>
 
-            <thead>
-                <tr>
-                    <th>الأستاذ</th>
-                    <th>التاريخ</th>
-                    <th>السبب</th>
-                    <th>الإجراء</th>
-                </tr>
-            </thead>
+<div class="table-box">
 
-            <tbody id="teacherAbsencesTable"></tbody>
+<table>
 
-        </table>
+<thead>
+<tr>
+<th>الأستاذ</th>
+<th>التاريخ</th>
+<th>السبب</th>
+<th>الإجراءات</th>
+</tr>
+</thead>
 
-    </div>
+<tbody id="teacherAbsencesTable"></tbody>
+
+</table>
+
+</div>
+</div>
 
 </section>
 
 <!-- PAYMENTS -->
 <section class="section" id="payments">
 
-    <div class="form-box">
+<div class="form-box">
 
-        <h2>💰 تسجيل الدفع</h2>
+<h2>💰 تسجيل الدفع</h2>
 
-        <div class="form-grid">
+<div class="form-grid">
 
-            <select id="paymentStudent">
-                <option value="">اختر الطالب</option>
-            </select>
+<select id="paymentStudent">
+<option value="">اختر الطالب</option>
+</select>
 
-            <input type="month" id="paymentMonth">
+<input type="month" id="paymentMonth">
 
-            <input
-                type="number"
-                id="paymentAmount"
-                placeholder="المبلغ"
-                min="0"
-                step="0.01"
-            >
+<input type="number" id="paymentAmount" placeholder="المبلغ" min="0" step="0.01">
 
-        </div>
+</div>
 
-        <br>
+<br>
 
-        <button class="success" id="markPaidBtn">
-            ✅ دفع
-        </button>
+<button class="success" id="markPaidBtn">✅ مدفوع</button>
 
-        <button class="danger" id="markUnpaidBtn">
-            ❌ غير مدفوع
-        </button>
+<button class="danger" id="markUnpaidBtn">❌ غير مدفوع</button>
 
-    </div>
+</div>
 
-    <div class="form-box">
+<div class="form-box">
 
-        <h2>📋 حالة الدفع</h2>
+<h2>💰 قائمة الدفع</h2>
 
-        <div class="form-grid">
+<div class="form-grid">
 
-            <input type="month" id="paymentFilterMonth">
+<input type="month" id="paymentFilterMonth">
 
-            <input
-                class="search"
-                id="paymentSearch"
-                placeholder="🔎 ابحث عن طالب..."
-            >
+<input class="search" id="paymentSearch" placeholder="🔎 ابحث عن طالب...">
 
-        </div>
+</div>
 
-    </div>
+<div class="table-box">
 
-    <div class="table-box">
+<table>
 
-        <table>
+<thead>
+<tr>
+<th>الطالب</th>
+<th>المادة</th>
+<th>السعر</th>
+<th>المبلغ</th>
+<th>الحالة</th>
+<th>الدين</th>
+<th>الإجراءات</th>
+</tr>
+</thead>
 
-            <thead>
-                <tr>
-                    <th>الطالب</th>
-                    <th>المادة</th>
-                    <th>السعر</th>
-                    <th>المبلغ المدفوع</th>
-                    <th>الحالة</th>
-                    <th>الدين</th>
-                    <th>الإجراءات</th>
-                </tr>
-            </thead>
+<tbody id="paymentsTable"></tbody>
 
-            <tbody id="paymentsTable"></tbody>
+</table>
 
-        </table>
-
-    </div>
+</div>
+</div>
 
 </section>
 
 </div>
 </div>
 
-<!-- CHANGE PASSWORD MODAL -->
+<!-- CHANGE PASSWORD -->
 <div class="modal" id="passwordModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <h2>🔐 تغيير كلمة السر</h2>
+<h2>🔐 تغيير كلمة السر</h2>
 
-        <input
-            type="password"
-            id="oldPassword"
-            placeholder="كلمة السر القديمة"
-        >
+<input type="password" id="newPassword" placeholder="كلمة السر الجديدة">
 
-        <br><br>
+<div class="modal-buttons">
 
-        <input
-            type="password"
-            id="newPassword"
-            placeholder="كلمة السر الجديدة"
-        >
+<button class="secondary" id="cancelPasswordBtn">إلغاء</button>
 
-        <br><br>
-
-        <input
-            type="password"
-            id="confirmPassword"
-            placeholder="تأكيد كلمة السر الجديدة"
-        >
-
-        <div id="passwordMessage" class="error"></div>
-
-        <div class="modal-buttons">
-
-            <button class="primary" id="savePasswordBtn">
-                حفظ
-            </button>
-
-            <button class="secondary" id="closePasswordBtn">
-                إلغاء
-            </button>
-
-        </div>
-
-    </div>
+<button class="primary" id="savePasswordBtn">حفظ</button>
 
 </div>
 
+</div>
+</div>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
 <script>
 
-/* =========================
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
+
+const firebaseConfig = {
+apiKey:"AIzaSyD-1TeKa1Q8JdIv2GZmHjQoAkavz8sB3Ek",
+authDomain:"doros-association.firebaseapp.com",
+projectId:"doros-association",
+storageBucket:"doros-association.firebasestorage.app",
+messagingSenderId:"286789857076",
+appId:"1:286789857076:web:4978c34679152e46927f61"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth=firebase.auth();
+const db=firebase.firestore();
+
+const cloudRef=db.collection("association").doc("main");
+
+let firebaseReady=false;
+let unsubscribe=null;
+
+
+/* =========================================
    DATA
-========================= */
+========================================= */
 
-const STORAGE_KEY = "association_data_final";
+const STORAGE_KEY="association_data_final";
 
-let data = {
-    password: "2005",
-    students: [],
-    teachers: [],
-    subjects: [],
-    studentAbsences: [],
-    teacherAbsences: [],
-    payments: []
+let data={
+password:"2005",
+students:[],
+teachers:[],
+subjects:[],
+studentAbsences:[],
+teacherAbsences:[],
+payments:[]
 };
 
 
-/* =========================
-   GET ELEMENTS
-========================= */
-
-const loginPage = document.getElementById("loginPage");
-const app = document.getElementById("app");
-
-const loginPassword = document.getElementById("loginPassword");
-const loginBtn = document.getElementById("loginBtn");
-const loginError = document.getElementById("loginError");
-
-const changePasswordBtn =
-    document.getElementById("changePasswordBtn");
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-const passwordModal =
-    document.getElementById("passwordModal");
-
-const oldPassword =
-    document.getElementById("oldPassword");
-
-const newPassword =
-    document.getElementById("newPassword");
-
-const confirmPassword =
-    document.getElementById("confirmPassword");
-
-const savePasswordBtn =
-    document.getElementById("savePasswordBtn");
-
-const closePasswordBtn =
-    document.getElementById("closePasswordBtn");
-
-const passwordMessage =
-    document.getElementById("passwordMessage");
-
-
-/* =========================
-   LOAD DATA
-========================= */
-
-function loadData(){
-
-    const saved = localStorage.getItem(STORAGE_KEY);
-
-    if(saved){
-
-        try{
-
-            const parsed = JSON.parse(saved);
-
-            data = {
-                ...data,
-                ...parsed
-            };
-
-        }catch(error){
-
-            console.log(error);
-
-        }
-
-    }
-
-    if(!data.password){
-        data.password = "2005";
-    }
-
-    if(!Array.isArray(data.students))
-        data.students = [];
-
-    if(!Array.isArray(data.teachers))
-        data.teachers = [];
-
-    if(!Array.isArray(data.subjects))
-        data.subjects = [];
-
-    if(!Array.isArray(data.studentAbsences))
-        data.studentAbsences = [];
-
-    if(!Array.isArray(data.teacherAbsences))
-        data.teacherAbsences = [];
-
-    if(!Array.isArray(data.payments))
-        data.payments = [];
-
-}
-
-
-/* =========================
-   SAVE
-========================= */
-
-function saveData(){
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(data)
-    );
-
-}
-
-
-/* =========================
-   ID
-========================= */
+/* =========================================
+   HELPERS
+========================================= */
 
 function id(){
-
-    return Date.now().toString() +
-        Math.random().toString(36).substring(2);
-
+return Date.now().toString(36)+Math.random().toString(36).substring(2,8);
 }
-
-
-/* =========================
-   DATE
-========================= */
 
 function currentMonth(){
+return new Date().toISOString().slice(0,7);
+}
 
-    const d = new Date();
+function today(){
+return new Date().toISOString().slice(0,10);
+}
 
-    return d.getFullYear() +
-        "-" +
-        String(d.getMonth()+1).padStart(2,"0");
+function escapeHTML(value){
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+
+/* =========================================
+   LOCAL STORAGE
+========================================= */
+
+function loadLocalData(){
+
+try{
+
+const saved=localStorage.getItem(STORAGE_KEY);
+
+if(saved){
+
+const parsed=JSON.parse(saved);
+
+data={
+...data,
+...parsed
+};
+
+}
+
+}catch(error){
+
+console.error(error);
+
+}
 
 }
 
 
-/* =========================
+function saveLocal(){
+
+try{
+
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(data)
+);
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =========================================
+   FIREBASE SAVE
+========================================= */
+
+async function saveData(){
+
+saveLocal();
+
+if(!firebaseReady)return;
+
+try{
+
+await cloudRef.set(data);
+
+console.log("تم الحفظ في Firebase ✅");
+
+}catch(error){
+
+console.error("Firebase save error:",error);
+
+}
+
+}
+
+
+/* =========================================
+   FIREBASE CONNECT
+========================================= */
+
+async function startFirebase(){
+
+try{
+
+await auth.signInAnonymously();
+
+firebaseReady=true;
+
+document.getElementById("firebaseStatus").textContent=
+"🟢 متصل بـ Firebase";
+
+const snap=await cloudRef.get();
+
+if(snap.exists){
+
+const cloud=snap.data();
+
+data={
+...data,
+...cloud
+};
+
+saveLocal();
+
+}else{
+
+await cloudRef.set(data);
+
+}
+
+renderAll();
+
+startRealtime();
+
+}catch(error){
+
+console.error(error);
+
+document.getElementById("firebaseStatus").textContent=
+"🔴 تعذر الاتصال بـ Firebase";
+
+renderAll();
+
+}
+
+}
+
+
+/* =========================================
+   REAL TIME
+========================================= */
+
+function startRealtime(){
+
+if(unsubscribe)unsubscribe();
+
+unsubscribe=cloudRef.onSnapshot(function(snapshot){
+
+if(!snapshot.exists)return;
+
+const cloud=snapshot.data();
+
+data={
+...data,
+...cloud
+};
+
+saveLocal();
+
+renderAll();
+
+});
+
+}
+
+
+/* =========================================
    LOGIN
-========================= */
+========================================= */
+
+document.getElementById("loginBtn")
+.addEventListener("click",login);
+
+document.getElementById("loginPassword")
+.addEventListener("keydown",function(e){
+
+if(e.key==="Enter")login();
+
+});
+
 
 function login(){
 
-    const password =
-        loginPassword.value.trim();
+const password=
+document.getElementById("loginPassword").value;
 
-    if(password === data.password){
+if(password===data.password){
 
-        loginPage.style.display = "none";
-        app.style.display = "block";
+document.getElementById("loginPage").style.display="none";
 
-        loginError.textContent = "";
+document.getElementById("app").style.display="block";
 
-        renderAll();
+document.getElementById("loginError").textContent="";
 
-    }else{
+renderAll();
 
-        loginError.textContent =
-            "❌ كلمة السر غير صحيحة";
+}else{
 
-    }
+document.getElementById("loginError").textContent=
+"❌ كلمة السر غير صحيحة";
 
 }
 
-loginBtn.addEventListener("click", login);
-
-loginPassword.addEventListener("keydown",function(e){
-
-    if(e.key === "Enter"){
-        login();
-    }
-
-});
+}
 
 
-/* =========================
+/* =========================================
    LOGOUT
-========================= */
+========================================= */
 
-logoutBtn.addEventListener("click",function(){
+document.getElementById("logoutBtn")
+.addEventListener("click",function(){
 
-    app.style.display = "none";
-    loginPage.style.display = "flex";
+document.getElementById("app").style.display="none";
 
-    loginPassword.value = "";
+document.getElementById("loginPage").style.display="flex";
+
+document.getElementById("loginPassword").value="";
 
 });
 
 
-/* =========================
+/* =========================================
+   CHANGE PASSWORD
+========================================= */
+
+const passwordModal=
+document.getElementById("passwordModal");
+
+document.getElementById("changePasswordBtn")
+.addEventListener("click",function(){
+
+passwordModal.style.display="flex";
+
+document.getElementById("newPassword").value="";
+
+});
+
+
+document.getElementById("cancelPasswordBtn")
+.addEventListener("click",function(){
+
+passwordModal.style.display="none";
+
+});
+
+
+document.getElementById("savePasswordBtn")
+.addEventListener("click",async function(){
+
+const newPassword=
+document.getElementById("newPassword").value.trim();
+
+if(!newPassword){
+
+alert("اكتبي كلمة السر الجديدة");
+
+return;
+
+}
+
+data.password=newPassword;
+
+await saveData();
+
+passwordModal.style.display="none";
+
+alert("تم تغيير كلمة السر ✅");
+
+});
+
+
+/* =========================================
    TABS
-========================= */
+========================================= */
 
 document.querySelectorAll(".tab")
 .forEach(function(tab){
 
-    tab.addEventListener("click",function(){
+tab.addEventListener("click",function(){
 
-        document.querySelectorAll(".tab")
-        .forEach(t => t.classList.remove("active"));
+document.querySelectorAll(".tab")
+.forEach(t=>t.classList.remove("active"));
 
-        document.querySelectorAll(".section")
-        .forEach(s => s.classList.remove("active"));
+document.querySelectorAll(".section")
+.forEach(s=>s.classList.remove("active"));
 
-        tab.classList.add("active");
+tab.classList.add("active");
 
-        const section =
-            document.getElementById(
-                tab.dataset.section
-            );
+document.getElementById(tab.dataset.section)
+.classList.add("active");
 
-        section.classList.add("active");
-
-    });
+});
 
 });
 
 
-/* =========================
-   PASSWORD
-========================= */
-
-changePasswordBtn.addEventListener(
-    "click",
-    function(){
-
-        passwordModal.style.display = "flex";
-
-        oldPassword.value = "";
-        newPassword.value = "";
-        confirmPassword.value = "";
-
-        passwordMessage.textContent = "";
-
-    }
-);
-
-closePasswordBtn.addEventListener(
-    "click",
-    function(){
-
-        passwordModal.style.display = "none";
-
-    }
-);
-
-savePasswordBtn.addEventListener(
-    "click",
-    function(){
-
-        const old =
-            oldPassword.value.trim();
-
-        const newPass =
-            newPassword.value.trim();
-
-        const confirm =
-            confirmPassword.value.trim();
-
-        if(old !== data.password){
-
-            passwordMessage.textContent =
-                "كلمة السر القديمة غير صحيحة";
-
-            return;
-
-        }
-
-        if(newPass.length < 4){
-
-            passwordMessage.textContent =
-                "كلمة السر لازم تكون 4 أرقام أو أكثر";
-
-            return;
-
-        }
-
-        if(newPass !== confirm){
-
-            passwordMessage.textContent =
-                "كلمة السر الجديدة غير متطابقة";
-
-            return;
-
-        }
-
-        data.password = newPass;
-
-        saveData();
-
-        passwordMessage.style.color = "green";
-
-        passwordMessage.textContent =
-            "✅ تم تغيير كلمة السر بنجاح";
-
-        setTimeout(function(){
-
-            passwordModal.style.display = "none";
-            passwordMessage.style.color = "";
-
-        },1000);
-
-    }
-);
-
-
-/* =========================
+/* =========================================
    STUDENTS
-========================= */
+========================================= */
 
 document.getElementById("addStudentBtn")
-.addEventListener("click",function(){
+.addEventListener("click",async function(){
 
-    const name =
-        document.getElementById("studentName")
-        .value.trim();
+const name=
+document.getElementById("studentName").value.trim();
 
-    const phone =
-        document.getElementById("studentPhone")
-        .value.trim();
+const phone=
+document.getElementById("studentPhone").value.trim();
 
-    const subjectId =
-        document.getElementById("studentSubject")
-        .value;
+const subjectId=
+document.getElementById("studentSubject").value;
 
-    const debt =
-        Number(
-            document.getElementById("studentDebt")
-            .value
-        ) || 0;
+const debt=
+Number(document.getElementById("studentDebt").value)||0;
 
-    if(!name){
+if(!name){
 
-        alert("اكتبي اسم الطالب");
+alert("اكتبي اسم الطالب");
 
-        return;
+return;
 
-    }
+}
 
-    const student = {
+data.students.push({
 
-        id:id(),
-        name:name,
-        phone:phone,
-        subjectId:subjectId,
-        debt:debt
-
-    };
-
-    data.students.push(student);
-
-    saveData();
-
-    document.getElementById("studentName").value = "";
-    document.getElementById("studentPhone").value = "";
-    document.getElementById("studentSubject").value = "";
-    document.getElementById("studentDebt").value = "";
-
-    renderAll();
+id:id(),
+name:name,
+phone:phone,
+subjectId:subjectId,
+debt:debt
 
 });
 
+await saveData();
 
-/* =========================
-   DELETE STUDENT
-========================= */
+document.getElementById("studentName").value="";
+document.getElementById("studentPhone").value="";
+document.getElementById("studentSubject").value="";
+document.getElementById("studentDebt").value="";
 
-function deleteStudent(studentId){
+renderAll();
 
-    if(!confirm("هل تريدين حذف هذا الطالب؟"))
-        return;
+});
 
-    data.students =
-        data.students.filter(
-            s => s.id !== studentId
-        );
-
-    data.studentAbsences =
-        data.studentAbsences.filter(
-            a => a.studentId !== studentId
-        );
-
-    data.payments =
-        data.payments.filter(
-            p => p.studentId !== studentId
-        );
-
-    saveData();
-
-    renderAll();
-
-}
-
-
-/* =========================
-   EDIT STUDENT
-========================= */
-
-function editStudent(studentId){
-
-    const student =
-        data.students.find(
-            s => s.id === studentId
-        );
-
-    if(!student) return;
-
-    const name =
-        prompt("اسم الطالب:",student.name);
-
-    if(name === null) return;
-
-    const phone =
-        prompt("رقم الهاتف:",student.phone || "");
-
-    if(phone === null) return;
-
-    const subject =
-        prompt(
-            "اكتب رقم المادة من القائمة:\n" +
-            data.subjects
-            .map((s,i) => (i+1)+". "+s.name)
-            .join("\n"),
-            student.subjectId
-            ? (
-                data.subjects.find(
-                    s => s.id === student.subjectId
-                )?.name || ""
-            )
-            : ""
-        );
-
-    if(subject === null) return;
-
-    const foundSubject =
-        data.subjects.find(
-            s => s.name.toLowerCase() === subject.toLowerCase()
-        );
-
-    const debt =
-        prompt(
-            "الدين:",
-            student.debt || 0
-        );
-
-    if(debt === null) return;
-
-    student.name = name.trim();
-    student.phone = phone.trim();
-
-    if(foundSubject){
-        student.subjectId = foundSubject.id;
-    }
-
-    student.debt =
-        Number(debt) || 0;
-
-    saveData();
-
-    renderAll();
-
-}
-
-
-/* =========================
-   STUDENT SEARCH
-========================= */
 
 document.getElementById("studentSearch")
 .addEventListener("input",renderStudents);
 
 
-/* =========================
-   STUDENT TABLE
-========================= */
-
 function renderStudents(){
 
-    const tbody =
-        document.getElementById("studentsTable");
+const tbody=document.getElementById("studentsTable");
 
-    const search =
-        document.getElementById("studentSearch")
-        .value
-        .trim()
-        .toLowerCase();
+const search=
+document.getElementById("studentSearch")
+.value.trim().toLowerCase();
 
-    const month = currentMonth();
+const students=data.students.filter(function(s){
 
-    const students =
-        data.students.filter(function(s){
-
-            return s.name
-                .toLowerCase()
-                .includes(search);
-
-        });
-
-    if(students.length === 0){
-
-        tbody.innerHTML =
-            `<tr>
-                <td colspan="8" class="empty">
-                    لا يوجد طلاب
-                </td>
-            </tr>`;
-
-        return;
-
-    }
-
-    tbody.innerHTML =
-        students.map(function(student){
-
-            const subject =
-                data.subjects.find(
-                    s => s.id === student.subjectId
-                );
-
-            const absenceCount =
-                data.studentAbsences.filter(
-                    a => a.studentId === student.id
-                ).length;
-
-            const payment =
-                data.payments.find(
-                    p =>
-                    p.studentId === student.id &&
-                    p.month === month
-                );
-
-            const paid =
-                payment &&
-                payment.status === "paid";
-
-            return `
-            <tr>
-
-                <td><strong>${escapeHTML(student.name)}</strong></td>
-
-                <td>${escapeHTML(student.phone || "-")}</td>
-
-                <td>
-                    ${subject
-                        ? escapeHTML(subject.name)
-                        : "—"}
-                </td>
-
-                <td>
-                    ${subject
-                        ? Number(subject.price || 0).toFixed(2)
-                        : "0.00"}
-                </td>
-
-                <td>
-                    <span class="badge unpaid">
-                        ${absenceCount}
-                    </span>
-                </td>
-
-                <td>
-                    <strong>
-                        ${Number(student.debt || 0).toFixed(2)}
-                    </strong>
-                </td>
-
-                <td>
-                    ${
-                        paid
-                        ? `<span class="badge paid">
-                            مدفوع
-                           </span>`
-                        : `<span class="badge unpaid">
-                            غير مدفوع
-                           </span>`
-                    }
-                </td>
-
-                <td>
-
-                    <div class="actions">
-
-                        <button
-                            class="success"
-                            onclick="quickPay('${student.id}')">
-                            💰 دفع
-                        </button>
-
-                        <button
-                            class="warning"
-                            onclick="editStudent('${student.id}')">
-                            ✏️ تعديل
-                        </button>
-
-                        <button
-                            class="danger"
-                            onclick="deleteStudent('${student.id}')">
-                            🗑️ حذف
-                        </button>
-
-                    </div>
-
-                </td>
-
-            </tr>
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================
-   TEACHERS
-========================= */
-
-document.getElementById("addTeacherBtn")
-.addEventListener("click",function(){
-
-    const name =
-        document.getElementById("teacherName")
-        .value.trim();
-
-    const phone =
-        document.getElementById("teacherPhone")
-        .value.trim();
-
-    const specialty =
-        document.getElementById("teacherSpecialty")
-        .value.trim();
-
-    if(!name){
-
-        alert("اكتبي اسم الأستاذ");
-
-        return;
-
-    }
-
-    data.teachers.push({
-
-        id:id(),
-        name:name,
-        phone:phone,
-        specialty:specialty
-
-    });
-
-    saveData();
-
-    document.getElementById("teacherName").value = "";
-    document.getElementById("teacherPhone").value = "";
-    document.getElementById("teacherSpecialty").value = "";
-
-    renderAll();
+return s.name.toLowerCase().includes(search);
 
 });
 
+if(!students.length){
 
-function deleteTeacher(teacherId){
+tbody.innerHTML=
+`<tr><td colspan="8" class="empty">لا توجد بيانات</td></tr>`;
 
-    if(!confirm("هل تريدين حذف الأستاذ؟"))
-        return;
-
-    data.teachers =
-        data.teachers.filter(
-            t => t.id !== teacherId
-        );
-
-    data.teacherAbsences =
-        data.teacherAbsences.filter(
-            a => a.teacherId !== teacherId
-        );
-
-    saveData();
-
-    renderAll();
+return;
 
 }
+
+const month=currentMonth();
+
+tbody.innerHTML=students.map(function(student){
+
+const subject=data.subjects.find(
+s=>s.id===student.subjectId
+);
+
+const absences=data.studentAbsences.filter(
+a=>a.studentId===student.id
+).length;
+
+const payment=data.payments.find(
+p=>p.studentId===student.id &&
+p.month===month
+);
+
+const paid=
+payment &&
+payment.status==="paid";
+
+const price=subject
+?Number(subject.price||0)
+:0;
+
+return `
+<tr>
+
+<td>
+<strong>${escapeHTML(student.name)}</strong>
+</td>
+
+<td>
+${escapeHTML(student.phone||"—")}
+</td>
+
+<td>
+${subject
+?escapeHTML(subject.name)
+:"—"}
+</td>
+
+<td>
+${price.toFixed(2)}
+</td>
+
+<td>
+${absences}
+</td>
+
+<td>
+${Number(student.debt||0).toFixed(2)}
+</td>
+
+<td>
+${
+paid
+?`<span class="badge paid">✅ مدفوع</span>`
+:`<span class="badge unpaid">❌ غير مدفوع</span>`
+}
+</td>
+
+<td>
+
+<div class="actions">
+
+<button class="success"
+onclick="quickPay('${student.id}')">
+💰 دفع
+</button>
+
+<button class="warning"
+onclick="editStudent('${student.id}')">
+✏️ تعديل
+</button>
+
+<button class="danger"
+onclick="deleteStudent('${student.id}')">
+🗑️ حذف
+</button>
+
+</div>
+
+</td>
+
+</tr>
+`;
+
+}).join("");
+
+}
+
+
+async function deleteStudent(studentId){
+
+if(!confirm("هل تريدين حذف الطالب؟"))return;
+
+data.students=
+data.students.filter(s=>s.id!==studentId);
+
+data.studentAbsences=
+data.studentAbsences.filter(
+a=>a.studentId!==studentId
+);
+
+data.payments=
+data.payments.filter(
+p=>p.studentId!==studentId
+);
+
+await saveData();
+
+renderAll();
+
+}
+
+
+async function editStudent(studentId){
+
+const student=
+data.students.find(s=>s.id===studentId);
+
+if(!student)return;
+
+const name=prompt(
+"اسم الطالب:",
+student.name
+);
+
+if(name===null)return;
+
+const phone=prompt(
+"رقم الهاتف:",
+student.phone||""
+);
+
+if(phone===null)return;
+
+const debt=prompt(
+"الدين:",
+student.debt||0
+);
+
+if(debt===null)return;
+
+student.name=name.trim();
+student.phone=phone.trim();
+student.debt=Number(debt)||0;
+
+await saveData();
+
+renderAll();
+
+}
+
+
+/* =========================================
+   TEACHERS
+========================================= */
+
+document.getElementById("addTeacherBtn")
+.addEventListener("click",async function(){
+
+const name=
+document.getElementById("teacherName").value.trim();
+
+const phone=
+document.getElementById("teacherPhone").value.trim();
+
+const specialty=
+document.getElementById("teacherSpecialty").value.trim();
+
+if(!name){
+
+alert("اكتبي اسم الأستاذ");
+
+return;
+
+}
+
+data.teachers.push({
+
+id:id(),
+name:name,
+phone:phone,
+specialty:specialty
+
+});
+
+await saveData();
+
+document.getElementById("teacherName").value="";
+document.getElementById("teacherPhone").value="";
+document.getElementById("teacherSpecialty").value="";
+
+renderAll();
+
+});
 
 
 document.getElementById("teacherSearch")
@@ -1531,583 +1140,522 @@ document.getElementById("teacherSearch")
 
 function renderTeachers(){
 
-    const tbody =
-        document.getElementById("teachersTable");
+const tbody=document.getElementById("teachersTable");
 
-    const search =
-        document.getElementById("teacherSearch")
-        .value
-        .trim()
-        .toLowerCase();
+const search=
+document.getElementById("teacherSearch")
+.value.trim().toLowerCase();
 
-    const teachers =
-        data.teachers.filter(
-            t => t.name
-                .toLowerCase()
-                .includes(search)
-        );
+const teachers=data.teachers.filter(function(t){
 
-    if(teachers.length === 0){
-
-        tbody.innerHTML =
-            `<tr>
-                <td colspan="4" class="empty">
-                    لا يوجد أساتذة
-                </td>
-            </tr>`;
-
-        return;
-
-    }
-
-    tbody.innerHTML =
-        teachers.map(function(t){
-
-            return `
-            <tr>
-
-                <td>
-                    <strong>
-                        ${escapeHTML(t.name)}
-                    </strong>
-                </td>
-
-                <td>
-                    ${escapeHTML(t.phone || "-")}
-                </td>
-
-                <td>
-                    ${escapeHTML(t.specialty || "-")}
-                </td>
-
-                <td>
-
-                    <button
-                        class="danger"
-                        onclick="deleteTeacher('${t.id}')">
-                        🗑️ حذف
-                    </button>
-
-                </td>
-
-            </tr>
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================
-   SUBJECTS
-========================= */
-
-document.getElementById("addSubjectBtn")
-.addEventListener("click",function(){
-
-    const name =
-        document.getElementById("subjectName")
-        .value.trim();
-
-    const price =
-        Number(
-            document.getElementById("subjectPrice")
-            .value
-        ) || 0;
-
-    if(!name){
-
-        alert("اكتبي اسم المادة");
-
-        return;
-
-    }
-
-    data.subjects.push({
-
-        id:id(),
-        name:name,
-        price:price
-
-    });
-
-    saveData();
-
-    document.getElementById("subjectName").value = "";
-    document.getElementById("subjectPrice").value = "";
-
-    renderAll();
+return t.name.toLowerCase().includes(search);
 
 });
 
+if(!teachers.length){
 
-function deleteSubject(subjectId){
+tbody.innerHTML=
+`<tr><td colspan="4" class="empty">لا توجد بيانات</td></tr>`;
 
-    if(!confirm("هل تريدين حذف المادة؟"))
-        return;
+return;
 
-    data.subjects =
-        data.subjects.filter(
-            s => s.id !== subjectId
-        );
+}
 
-    data.students.forEach(function(student){
+tbody.innerHTML=teachers.map(function(t){
 
-        if(student.subjectId === subjectId){
-            student.subjectId = "";
-        }
+return `
+<tr>
 
-    });
+<td>
+${escapeHTML(t.name)}
+</td>
 
-    saveData();
+<td>
+${escapeHTML(t.phone||"—")}
+</td>
 
-    renderAll();
+<td>
+${escapeHTML(t.specialty||"—")}
+</td>
+
+<td>
+
+<button class="danger"
+onclick="deleteTeacher('${t.id}')">
+🗑️ حذف
+</button>
+
+</td>
+
+</tr>
+`;
+
+}).join("");
 
 }
 
 
-function editSubject(subjectId){
+async function deleteTeacher(teacherId){
 
-    const subject =
-        data.subjects.find(
-            s => s.id === subjectId
-        );
+if(!confirm("هل تريدين حذف الأستاذ؟"))return;
 
-    if(!subject) return;
+data.teachers=
+data.teachers.filter(t=>t.id!==teacherId);
 
-    const name =
-        prompt("اسم المادة:",subject.name);
+data.teacherAbsences=
+data.teacherAbsences.filter(
+a=>a.teacherId!==teacherId
+);
 
-    if(name === null) return;
+await saveData();
 
-    const price =
-        prompt("السعر الشهري:",subject.price);
-
-    if(price === null) return;
-
-    subject.name =
-        name.trim();
-
-    subject.price =
-        Number(price) || 0;
-
-    saveData();
-
-    renderAll();
+renderAll();
 
 }
+
+
+/* =========================================
+   SUBJECTS
+========================================= */
+
+document.getElementById("addSubjectBtn")
+.addEventListener("click",async function(){
+
+const name=
+document.getElementById("subjectName").value.trim();
+
+const price=
+Number(document.getElementById("subjectPrice").value)||0;
+
+if(!name){
+
+alert("اكتبي اسم المادة");
+
+return;
+
+}
+
+data.subjects.push({
+
+id:id(),
+name:name,
+price:price
+
+});
+
+await saveData();
+
+document.getElementById("subjectName").value="";
+document.getElementById("subjectPrice").value="";
+
+renderAll();
+
+});
 
 
 function renderSubjects(){
 
-    const tbody =
-        document.getElementById("subjectsTable");
+const tbody=document.getElementById("subjectsTable");
 
-    if(data.subjects.length === 0){
+if(!data.subjects.length){
 
-        tbody.innerHTML =
-            `<tr>
-                <td colspan="4" class="empty">
-                    لا توجد مواد
-                </td>
-            </tr>`;
+tbody.innerHTML=
+`<tr><td colspan="3" class="empty">لا توجد مواد</td></tr>`;
 
-        return;
+return;
 
-    }
+}
 
-    tbody.innerHTML =
-        data.subjects.map(function(subject){
+tbody.innerHTML=data.subjects.map(function(s){
 
-            const count =
-                data.students.filter(
-                    s => s.subjectId === subject.id
-                ).length;
+return `
+<tr>
 
-            return `
-            <tr>
+<td>${escapeHTML(s.name)}</td>
 
-                <td>
-                    <strong>
-                        ${escapeHTML(subject.name)}
-                    </strong>
-                </td>
+<td>${Number(s.price||0).toFixed(2)}</td>
 
-                <td>
-                    ${Number(subject.price || 0).toFixed(2)}
-                </td>
+<td>
 
-                <td>${count}</td>
+<div class="actions">
 
-                <td>
+<button class="warning"
+onclick="editSubject('${s.id}')">
+✏️ تعديل
+</button>
 
-                    <button
-                        class="warning"
-                        onclick="editSubject('${subject.id}')">
-                        ✏️ تعديل
-                    </button>
+<button class="danger"
+onclick="deleteSubject('${s.id}')">
+🗑️ حذف
+</button>
 
-                    <button
-                        class="danger"
-                        onclick="deleteSubject('${subject.id}')">
-                        🗑️ حذف
-                    </button>
+</div>
 
-                </td>
+</td>
 
-            </tr>
-            `;
+</tr>
+`;
 
-        }).join("");
+}).join("");
 
 }
 
 
-/* =========================
-   SELECTS
-========================= */
+async function editSubject(subjectId){
 
-function fillSelects(){
+const subject=
+data.subjects.find(s=>s.id===subjectId);
 
-    const studentSubject =
-        document.getElementById("studentSubject");
+if(!subject)return;
 
-    studentSubject.innerHTML =
-        `<option value="">اختر المادة</option>` +
-        data.subjects.map(function(s){
+const name=prompt(
+"اسم المادة:",
+subject.name
+);
 
-            return `
-            <option value="${s.id}">
-                ${escapeHTML(s.name)}
-            </option>
-            `;
+if(name===null)return;
 
-        }).join("");
+const price=prompt(
+"السعر الشهري:",
+subject.price
+);
 
+if(price===null)return;
 
-    const absenceStudent =
-        document.getElementById("absenceStudent");
+subject.name=name.trim();
+subject.price=Number(price)||0;
 
-    absenceStudent.innerHTML =
-        `<option value="">اختر الطالب</option>` +
-        data.students.map(function(s){
+await saveData();
 
-            return `
-            <option value="${s.id}">
-                ${escapeHTML(s.name)}
-            </option>
-            `;
-
-        }).join("");
-
-
-    const paymentStudent =
-        document.getElementById("paymentStudent");
-
-    paymentStudent.innerHTML =
-        `<option value="">اختر الطالب</option>` +
-        data.students.map(function(s){
-
-            return `
-            <option value="${s.id}">
-                ${escapeHTML(s.name)}
-            </option>
-            `;
-
-        }).join("");
-
-
-    const absenceTeacher =
-        document.getElementById("absenceTeacher");
-
-    absenceTeacher.innerHTML =
-        `<option value="">اختر الأستاذ</option>` +
-        data.teachers.map(function(t){
-
-            return `
-            <option value="${t.id}">
-                ${escapeHTML(t.name)}
-            </option>
-            `;
-
-        }).join("");
+renderAll();
 
 }
 
 
-/* =========================
-   STUDENT ABSENCE
-========================= */
+async function deleteSubject(subjectId){
 
-document.getElementById("addStudentAbsenceBtn")
-.addEventListener("click",function(){
+if(!confirm("هل تريدين حذف المادة؟"))return;
 
-    const studentId =
-        document.getElementById("absenceStudent")
-        .value;
+data.subjects=
+data.subjects.filter(s=>s.id!==subjectId);
 
-    const date =
-        document.getElementById("absenceDate")
-        .value;
+data.students.forEach(function(student){
 
-    const reason =
-        document.getElementById("absenceReason")
-        .value.trim();
+if(student.subjectId===subjectId){
 
-    if(!studentId || !date){
+student.subjectId="";
 
-        alert("اختاري الطالب والتاريخ");
-
-        return;
-
-    }
-
-    data.studentAbsences.push({
-
-        id:id(),
-        studentId:studentId,
-        date:date,
-        reason:reason
-
-    });
-
-    saveData();
-
-    document.getElementById("absenceStudent").value = "";
-    document.getElementById("absenceDate").value = "";
-    document.getElementById("absenceReason").value = "";
-
-    renderAll();
+}
 
 });
 
+await saveData();
 
-function deleteStudentAbsence(absenceId){
-
-    data.studentAbsences =
-        data.studentAbsences.filter(
-            a => a.id !== absenceId
-        );
-
-    saveData();
-
-    renderAll();
+renderAll();
 
 }
+
+
+/* =========================================
+   SELECTS
+========================================= */
+
+function fillSelects(){
+
+const studentSubject=
+document.getElementById("studentSubject");
+
+const absenceStudent=
+document.getElementById("absenceStudent");
+
+const absenceTeacher=
+document.getElementById("absenceTeacher");
+
+const paymentStudent=
+document.getElementById("paymentStudent");
+
+
+studentSubject.innerHTML=
+`<option value="">اختر المادة</option>`+
+data.subjects.map(s=>
+`<option value="${s.id}">
+${escapeHTML(s.name)}
+</option>`
+).join("");
+
+
+absenceStudent.innerHTML=
+`<option value="">اختر الطالب</option>`+
+data.students.map(s=>
+`<option value="${s.id}">
+${escapeHTML(s.name)}
+</option>`
+).join("");
+
+
+absenceTeacher.innerHTML=
+`<option value="">اختر الأستاذ</option>`+
+data.teachers.map(t=>
+`<option value="${t.id}">
+${escapeHTML(t.name)}
+</option>`
+).join("");
+
+
+paymentStudent.innerHTML=
+`<option value="">اختر الطالب</option>`+
+data.students.map(s=>
+`<option value="${s.id}">
+${escapeHTML(s.name)}
+</option>`
+).join("");
+
+}
+
+
+/* =========================================
+   STUDENT ABSENCES
+========================================= */
+
+document.getElementById("studentAbsenceDate").value=today();
+
+document.getElementById("addStudentAbsenceBtn")
+.addEventListener("click",async function(){
+
+const studentId=
+document.getElementById("absenceStudent").value;
+
+const date=
+document.getElementById("studentAbsenceDate").value;
+
+const reason=
+document.getElementById("studentAbsenceReason").value.trim();
+
+if(!studentId||!date){
+
+alert("اختاري الطالب والتاريخ");
+
+return;
+
+}
+
+data.studentAbsences.push({
+
+id:id(),
+studentId:studentId,
+date:date,
+reason:reason
+
+});
+
+await saveData();
+
+document.getElementById("absenceStudent").value="";
+document.getElementById("studentAbsenceDate").value=today();
+document.getElementById("studentAbsenceReason").value="";
+
+renderAll();
+
+});
 
 
 function renderStudentAbsences(){
 
-    const tbody =
-        document.getElementById(
-            "studentAbsencesTable"
-        );
+const tbody=
+document.getElementById("studentAbsencesTable");
 
-    const rows =
-        [...data.studentAbsences]
-        .sort(
-            (a,b) =>
-            b.date.localeCompare(a.date)
-        );
+const rows=
+[...data.studentAbsences]
+.sort((a,b)=>b.date.localeCompare(a.date));
 
-    if(rows.length === 0){
+if(!rows.length){
 
-        tbody.innerHTML =
-            `<tr>
-                <td colspan="4" class="empty">
-                    لا توجد غيابات
-                </td>
-            </tr>`;
+tbody.innerHTML=
+`<tr><td colspan="4" class="empty">لا توجد غيابات</td></tr>`;
 
-        return;
+return;
 
-    }
+}
 
-    tbody.innerHTML =
-        rows.map(function(a){
+tbody.innerHTML=rows.map(function(a){
 
-            const student =
-                data.students.find(
-                    s => s.id === a.studentId
-                );
+const student=
+data.students.find(
+s=>s.id===a.studentId
+);
 
-            return `
-            <tr>
+return `
+<tr>
 
-                <td>
-                    ${student
-                        ? escapeHTML(student.name)
-                        : "طالب محذوف"}
-                </td>
+<td>
+${student
+?escapeHTML(student.name)
+:"طالب محذوف"}
+</td>
 
-                <td>${a.date}</td>
+<td>${a.date}</td>
 
-                <td>
-                    ${escapeHTML(a.reason || "-")}
-                </td>
+<td>${escapeHTML(a.reason||"—")}</td>
 
-                <td>
+<td>
 
-                    <button
-                        class="danger"
-                        onclick="deleteStudentAbsence('${a.id}')">
-                        🗑️ حذف
-                    </button>
+<button class="danger"
+onclick="deleteStudentAbsence('${a.id}')">
+🗑️ حذف
+</button>
 
-                </td>
+</td>
 
-            </tr>
-            `;
+</tr>
+`;
 
-        }).join("");
+}).join("");
 
 }
 
 
-/* =========================
-   TEACHER ABSENCE
-========================= */
+async function deleteStudentAbsence(absenceId){
+
+data.studentAbsences=
+data.studentAbsences.filter(
+a=>a.id!==absenceId
+);
+
+await saveData();
+
+renderAll();
+
+}
+
+
+/* =========================================
+   TEACHER ABSENCES
+========================================= */
+
+document.getElementById("teacherAbsenceDate").value=today();
 
 document.getElementById("addTeacherAbsenceBtn")
-.addEventListener("click",function(){
+.addEventListener("click",async function(){
 
-    const teacherId =
-        document.getElementById("absenceTeacher")
-        .value;
+const teacherId=
+document.getElementById("absenceTeacher").value;
 
-    const date =
-        document.getElementById("teacherAbsenceDate")
-        .value;
+const date=
+document.getElementById("teacherAbsenceDate").value;
 
-    const reason =
-        document.getElementById("teacherAbsenceReason")
-        .value.trim();
+const reason=
+document.getElementById("teacherAbsenceReason").value.trim();
 
-    if(!teacherId || !date){
+if(!teacherId||!date){
 
-        alert("اختاري الأستاذ والتاريخ");
+alert("اختاري الأستاذ والتاريخ");
 
-        return;
+return;
 
-    }
+}
 
-    data.teacherAbsences.push({
+data.teacherAbsences.push({
 
-        id:id(),
-        teacherId:teacherId,
-        date:date,
-        reason:reason
+id:id(),
+teacherId:teacherId,
+date:date,
+reason:reason
 
-    });
+});
 
-    saveData();
+await saveData();
 
-    document.getElementById("absenceTeacher").value = "";
-    document.getElementById("teacherAbsenceDate").value = "";
-    document.getElementById("teacherAbsenceReason").value = "";
+document.getElementById("absenceTeacher").value="";
+document.getElementById("teacherAbsenceDate").value=today();
+document.getElementById("teacherAbsenceReason").value="";
 
-    renderAll();
+renderAll();
 
 });
 
 
-function deleteTeacherAbsence(absenceId){
-
-    data.teacherAbsences =
-        data.teacherAbsences.filter(
-            a => a.id !== absenceId
-        );
-
-    saveData();
-
-    renderAll();
-
-}
-
-
 function renderTeacherAbsences(){
 
-    const tbody =
-        document.getElementById(
-            "teacherAbsencesTable"
-        );
+const tbody=
+document.getElementById("teacherAbsencesTable");
 
-    const rows =
-        [...data.teacherAbsences]
-        .sort(
-            (a,b) =>
-            b.date.localeCompare(a.date)
-        );
+const rows=
+[...data.teacherAbsences]
+.sort((a,b)=>b.date.localeCompare(a.date));
 
-    if(rows.length === 0){
+if(!rows.length){
 
-        tbody.innerHTML =
-            `<tr>
-                <td colspan="4" class="empty">
-                    لا توجد غيابات
-                </td>
-            </tr>`;
+tbody.innerHTML=
+`<tr><td colspan="4" class="empty">لا توجد غيابات</td></tr>`;
 
-        return;
+return;
 
-    }
+}
 
-    tbody.innerHTML =
-        rows.map(function(a){
+tbody.innerHTML=rows.map(function(a){
 
-            const teacher =
-                data.teachers.find(
-                    t => t.id === a.teacherId
-                );
+const teacher=
+data.teachers.find(
+t=>t.id===a.teacherId
+);
 
-            return `
-            <tr>
+return `
+<tr>
 
-                <td>
-                    ${teacher
-                        ? escapeHTML(teacher.name)
-                        : "أستاذ محذوف"}
-                </td>
+<td>
+${teacher
+?escapeHTML(teacher.name)
+:"أستاذ محذوف"}
+</td>
 
-                <td>${a.date}</td>
+<td>${a.date}</td>
 
-                <td>
-                    ${escapeHTML(a.reason || "-")}
-                </td>
+<td>${escapeHTML(a.reason||"—")}</td>
 
-                <td>
+<td>
 
-                    <button
-                        class="danger"
-                        onclick="deleteTeacherAbsence('${a.id}')">
-                        🗑️ حذف
-                    </button>
+<button class="danger"
+onclick="deleteTeacherAbsence('${a.id}')">
+🗑️ حذف
+</button>
 
-                </td>
+</td>
 
-            </tr>
-            `;
+</tr>
+`;
 
-        }).join("");
+}).join("");
 
 }
 
 
-/* =========================
+async function deleteTeacherAbsence(absenceId){
+
+data.teacherAbsences=
+data.teacherAbsences.filter(
+a=>a.id!==absenceId
+);
+
+await saveData();
+
+renderAll();
+
+}
+
+
+/* =========================================
    PAYMENTS
-========================= */
+========================================= */
 
-document.getElementById("paymentMonth")
-.value = currentMonth();
+document.getElementById("paymentMonth").value=currentMonth();
 
-document.getElementById("paymentFilterMonth")
-.value = currentMonth();
+document.getElementById("paymentFilterMonth").value=currentMonth();
 
 
 document.getElementById("markPaidBtn")
 .addEventListener("click",function(){
 
-    savePayment("paid");
+savePayment("paid");
 
 });
 
@@ -2115,140 +1663,136 @@ document.getElementById("markPaidBtn")
 document.getElementById("markUnpaidBtn")
 .addEventListener("click",function(){
 
-    savePayment("unpaid");
+savePayment("unpaid");
 
 });
 
 
-function savePayment(status){
+async function savePayment(status){
 
-    const studentId =
-        document.getElementById("paymentStudent")
-        .value;
+const studentId=
+document.getElementById("paymentStudent").value;
 
-    const month =
-        document.getElementById("paymentMonth")
-        .value;
+const month=
+document.getElementById("paymentMonth").value;
 
-    const amount =
-        Number(
-            document.getElementById("paymentAmount")
-            .value
-        ) || 0;
+const amount=
+Number(document.getElementById("paymentAmount").value)||0;
 
-    if(!studentId || !month){
+if(!studentId||!month){
 
-        alert("اختاري الطالب والشهر");
+alert("اختاري الطالب والشهر");
 
-        return;
+return;
 
-    }
+}
 
-    let payment =
-        data.payments.find(
-            p =>
-            p.studentId === studentId &&
-            p.month === month
-        );
+let payment=
+data.payments.find(
+p=>p.studentId===studentId&&
+p.month===month
+);
 
-    if(payment){
+if(payment){
 
-        payment.status = status;
-        payment.amount =
-            status === "paid"
-            ? amount
-            : 0;
+payment.status=status;
 
-    }else{
+payment.amount=
+status==="paid"
+?amount
+:0;
 
-        data.payments.push({
+}else{
 
-            id:id(),
-            studentId:studentId,
-            month:month,
-            amount:
-                status === "paid"
-                ? amount
-                : 0,
-            status:status
+data.payments.push({
 
-        });
+id:id(),
+studentId:studentId,
+month:month,
+amount:
+status==="paid"
+?amount
+:0,
+status:status
 
-    }
+});
 
-    saveData();
+}
 
-    document.getElementById("paymentAmount").value = "";
+await saveData();
 
-    renderAll();
+document.getElementById("paymentAmount").value="";
+
+renderAll();
 
 }
 
 
-function quickPay(studentId){
+async function quickPay(studentId){
 
-    const month = currentMonth();
+const month=currentMonth();
 
-    const student =
-        data.students.find(
-            s => s.id === studentId
-        );
+const student=
+data.students.find(
+s=>s.id===studentId
+);
 
-    if(!student) return;
+if(!student)return;
 
-    const subject =
-        data.subjects.find(
-            s => s.id === student.subjectId
-        );
+const subject=
+data.subjects.find(
+s=>s.id===student.subjectId
+);
 
-    const amount =
-        subject
-        ? Number(subject.price || 0)
-        : 0;
+const amount=
+subject
+?Number(subject.price||0)
+:0;
 
-    let payment =
-        data.payments.find(
-            p =>
-            p.studentId === studentId &&
-            p.month === month
-        );
+let payment=
+data.payments.find(
+p=>p.studentId===studentId&&
+p.month===month
+);
 
-    if(payment){
+if(payment){
 
-        payment.status = "paid";
-        payment.amount = amount;
+payment.status="paid";
+payment.amount=amount;
 
-    }else{
+}else{
 
-        data.payments.push({
+data.payments.push({
 
-            id:id(),
-            studentId:studentId,
-            month:month,
-            amount:amount,
-            status:"paid"
+id:id(),
+studentId:studentId,
+month:month,
+amount:amount,
+status:"paid"
 
-        });
+});
 
-    }
+}
 
-    saveData();
+await saveData();
 
-    renderAll();
+renderAll();
 
 }
 
 
-function deletePayment(paymentId){
+async function deletePayment(paymentId){
 
-    data.payments =
-        data.payments.filter(
-            p => p.id !== paymentId
-        );
+if(!confirm("هل تريدين حذف الدفع؟"))return;
 
-    saveData();
+data.payments=
+data.payments.filter(
+p=>p.id!==paymentId
+);
 
-    renderAll();
+await saveData();
+
+renderAll();
 
 }
 
@@ -2262,255 +1806,228 @@ document.getElementById("paymentSearch")
 
 function renderPayments(){
 
-    const tbody =
-        document.getElementById("paymentsTable");
+const tbody=
+document.getElementById("paymentsTable");
 
-    const month =
-        document.getElementById("paymentFilterMonth")
-        .value || currentMonth();
+const month=
+document.getElementById("paymentFilterMonth").value||
+currentMonth();
 
-    const search =
-        document.getElementById("paymentSearch")
-        .value
-        .trim()
-        .toLowerCase();
+const search=
+document.getElementById("paymentSearch")
+.value.trim().toLowerCase();
 
-    const students =
-        data.students.filter(function(student){
+const students=
+data.students.filter(
+s=>s.name.toLowerCase().includes(search)
+);
 
-            return student.name
-                .toLowerCase()
-                .includes(search);
+if(!students.length){
 
-        });
+tbody.innerHTML=
+`<tr><td colspan="7" class="empty">لا توجد بيانات</td></tr>`;
 
-    if(students.length === 0){
+return;
 
-        tbody.innerHTML =
-            `<tr>
-                <td colspan="7" class="empty">
-                    لا توجد بيانات
-                </td>
-            </tr>`;
+}
 
-        return;
+tbody.innerHTML=students.map(function(student){
 
-    }
+const subject=
+data.subjects.find(
+s=>s.id===student.subjectId
+);
 
-    tbody.innerHTML =
-        students.map(function(student){
+const payment=
+data.payments.find(
+p=>p.studentId===student.id&&
+p.month===month
+);
 
-            const subject =
-                data.subjects.find(
-                    s => s.id === student.subjectId
-                );
+const paid=
+payment&&payment.status==="paid";
 
-            const payment =
-                data.payments.find(
-                    p =>
-                    p.studentId === student.id &&
-                    p.month === month
-                );
+const price=
+subject
+?Number(subject.price||0)
+:0;
 
-            const paid =
-                payment &&
-                payment.status === "paid";
+const amount=
+payment
+?Number(payment.amount||0)
+:0;
 
-            const price =
-                subject
-                ? Number(subject.price || 0)
-                : 0;
+return `
+<tr>
 
-            const amount =
-                payment
-                ? Number(payment.amount || 0)
-                : 0;
+<td>
+<strong>${escapeHTML(student.name)}</strong>
+</td>
 
-            return `
-            <tr>
+<td>
+${subject
+?escapeHTML(subject.name)
+:"—"}
+</td>
 
-                <td>
-                    <strong>
-                        ${escapeHTML(student.name)}
-                    </strong>
-                </td>
+<td>
+${price.toFixed(2)}
+</td>
 
-                <td>
-                    ${subject
-                        ? escapeHTML(subject.name)
-                        : "—"}
-                </td>
+<td>
+${amount.toFixed(2)}
+</td>
 
-                <td>
-                    ${price.toFixed(2)}
-                </td>
+<td>
+${
+paid
+?`<span class="badge paid">✅ مدفوع</span>`
+:`<span class="badge unpaid">❌ غير مدفوع</span>`
+}
+</td>
 
-                <td>
-                    ${amount.toFixed(2)}
-                </td>
+<td>
+${Number(student.debt||0).toFixed(2)}
+</td>
 
-                <td>
-                    ${
-                        paid
-                        ? `<span class="badge paid">
-                            ✅ مدفوع
-                           </span>`
-                        : `<span class="badge unpaid">
-                            ❌ غير مدفوع
-                           </span>`
-                    }
-                </td>
+<td>
 
-                <td>
-                    ${Number(student.debt || 0).toFixed(2)}
-                </td>
+<div class="actions">
 
-                <td>
+<button class="success"
+onclick="quickPay('${student.id}')">
+💰 دفع
+</button>
 
-                    <div class="actions">
+${
+payment
+?`
+<button class="danger"
+onclick="deletePayment('${payment.id}')">
+🗑️ حذف الدفع
+</button>
+`
+:""
+}
 
-                        <button
-                            class="success"
-                            onclick="quickPay('${student.id}')">
-                            💰 دفع
-                        </button>
+</div>
 
-                        ${
-                            payment
-                            ? `
-                            <button
-                                class="danger"
-                                onclick="deletePayment('${payment.id}')">
-                                🗑️ حذف الدفع
-                            </button>
-                            `
-                            : ""
-                        }
+</td>
 
-                    </div>
+</tr>
+`;
 
-                </td>
-
-            </tr>
-            `;
-
-        }).join("");
+}).join("");
 
 }
 
 
-/* =========================
+/* =========================================
    DASHBOARD
-========================= */
+========================================= */
 
 function renderDashboard(){
 
-    document.getElementById("dashStudents")
-        .textContent =
-        data.students.length;
+document.getElementById("dashStudents")
+.textContent=data.students.length;
 
-    document.getElementById("dashTeachers")
-        .textContent =
-        data.teachers.length;
+document.getElementById("dashTeachers")
+.textContent=data.teachers.length;
 
-    document.getElementById("dashSubjects")
-        .textContent =
-        data.subjects.length;
+document.getElementById("dashSubjects")
+.textContent=data.subjects.length;
 
-    document.getElementById("dashStudentAbsences")
-        .textContent =
-        data.studentAbsences.length;
+document.getElementById("dashStudentAbsences")
+.textContent=data.studentAbsences.length;
 
-    document.getElementById("dashTeacherAbsences")
-        .textContent =
-        data.teacherAbsences.length;
+document.getElementById("dashTeacherAbsences")
+.textContent=data.teacherAbsences.length;
 
+const month=currentMonth();
 
-    const month = currentMonth();
+const payments=
+data.payments.filter(
+p=>p.month===month
+);
 
-    const payments =
-        data.payments.filter(
-            p => p.month === month
-        );
+const paid=
+payments.filter(
+p=>p.status==="paid"
+).length;
 
-    const paid =
-        payments.filter(
-            p => p.status === "paid"
-        ).length;
+const unpaid=
+Math.max(
+0,
+data.students.length-paid
+);
 
-    const unpaid =
-        data.students.length - paid;
+const total=
+payments
+.filter(p=>p.status==="paid")
+.reduce(
+(sum,p)=>sum+Number(p.amount||0),
+0
+);
 
-    const total =
-        payments
-        .filter(p => p.status === "paid")
-        .reduce(
-            (sum,p) =>
-            sum + Number(p.amount || 0),
-            0
-        );
+document.getElementById("monthSummary")
+.innerHTML=`
 
-    document.getElementById("monthSummary")
-        .innerHTML =
-        `
-        <strong>الشهر:</strong> ${month}
-        <br><br>
-        💰 المدفوعين: <strong>${paid}</strong>
-        <br>
-        ❌ غير المدفوعين: <strong>${unpaid}</strong>
-        <br>
-        💵 مجموع المداخيل: <strong>${total.toFixed(2)}</strong>
-        `;
+<strong>الشهر:</strong> ${month}
 
-}
+<br><br>
 
+💰 المدفوعين:
+<strong>${paid}</strong>
 
-/* =========================
-   ESCAPE HTML
-========================= */
+<br>
 
-function escapeHTML(value){
+❌ غير المدفوعين:
+<strong>${unpaid}</strong>
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+<br>
+
+💵 مجموع المداخيل:
+<strong>${total.toFixed(2)}</strong>
+
+`;
 
 }
 
 
-/* =========================
+/* =========================================
    RENDER ALL
-========================= */
+========================================= */
 
 function renderAll(){
 
-    fillSelects();
+fillSelects();
 
-    renderStudents();
+renderStudents();
 
-    renderTeachers();
+renderTeachers();
 
-    renderSubjects();
+renderSubjects();
 
-    renderStudentAbsences();
+renderStudentAbsences();
 
-    renderTeacherAbsences();
+renderTeacherAbsences();
 
-    renderPayments();
+renderPayments();
 
-    renderDashboard();
+renderDashboard();
 
 }
 
 
-/* =========================
+/* =========================================
    START
-========================= */
+========================================= */
 
-loadData();
+loadLocalData();
+
+renderAll();
+
+startFirebase();
 
 </script>
 
